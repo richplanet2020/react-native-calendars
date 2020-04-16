@@ -101,6 +101,7 @@ class AgendaList extends Component {
     if (!this.didScroll) {
       this.didScroll = true;
     }
+    
     _.invoke(this.props, 'onScroll', event);
   }
 
@@ -146,6 +147,7 @@ class AgendaList extends Component {
         viewabilityConfig={this.viewabilityConfig}
         renderSectionHeader={this.renderSectionHeader}
         onScroll={this.onScroll}
+        //scrollEnabled={false} // bg.choi
         onMomentumScrollBegin={this.onMomentumScrollBegin}
         onMomentumScrollEnd={this.onMomentumScrollEnd}
         // onScrollToIndexFailed={(info) => { console.warn('onScrollToIndexFailed info: ', info); }}

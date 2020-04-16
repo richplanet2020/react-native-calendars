@@ -279,7 +279,8 @@ class ExpandableCalendar extends Component {
   /** Animated */
   
   bounceToPosition(toValue) {  
-    if (!this.props.disablePan) {  
+    if (!this.props.disablePan) {
+      console.log('bg:bounceToPosition --- ')
       const {deltaY} = this.state;
       const threshold = this.openHeight / 1.75;
 
@@ -401,7 +402,7 @@ class ExpandableCalendar extends Component {
 
   renderHeader() {
     const monthYear = XDate(this.props.context.date).toString('MMMM yyyy');
-
+    //console.log('monthYear = ' + monthYear);
     return (
       <Animated.View
         ref={e => this.header = e}
@@ -414,6 +415,7 @@ class ExpandableCalendar extends Component {
     );
   }
 
+  // 주 달력
   renderWeekCalendar() {
     const {position} = this.state;
     const {disableWeekScroll} = this.props;
@@ -468,6 +470,7 @@ class ExpandableCalendar extends Component {
     );
   }
 
+  
   render() {
     const {style, hideKnob, horizontal, allowShadow, theme, ...others} = this.props;
     const {deltaY, position, screenReaderEnabled} = this.state;
@@ -475,7 +478,7 @@ class ExpandableCalendar extends Component {
     const themeObject = Object.assign(this.headerStyleOverride, theme);
 
     return (
-      <View testID={this.props.testID} style={[allowShadow && this.style.containerShadow, style]}>
+      <View style={[allowShadow && this.style.containerShadow, style]}>
         {screenReaderEnabled ?
           <Calendar
             testID="calendar"

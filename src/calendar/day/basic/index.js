@@ -51,6 +51,7 @@ class Day extends Component {
         marking: true
       };
     }
+
     
     const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
     
