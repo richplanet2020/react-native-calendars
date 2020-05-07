@@ -136,7 +136,7 @@ class CalendarHeader extends Component {
         importantForAccessibility={this.props.importantForAccessibility} // Android
       >
         {/* [BONG APPEND] Header Style */}
-        <TouchableNativeFeedback
+        <TouchableOpacity
           testID={`${testID}`}
           onPress={() => {
             this.props.scrollToMonth(XDate());
@@ -154,7 +154,7 @@ class CalendarHeader extends Component {
               <Text style={this.style.todayBtnIcon}>오늘</Text>
             </View>
           </View>
-        </TouchableNativeFeedback>
+        </ㅆ>
 
         {!this.props.hideDayNames && (
           <View style={this.style.week}>
