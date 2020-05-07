@@ -154,7 +154,7 @@ class CalendarHeader extends Component {
               <Text style={this.style.todayBtnIcon}>오늘</Text>
             </View>
           </View>
-        </ㅆ>
+        </TouchableOpacity>
 
         {!this.props.hideDayNames && (
           <View style={this.style.week}>
