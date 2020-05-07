@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import * as defaultStyle from '../../style';
 
 const STYLESHEET_ID = 'stylesheet.calendar.header';
 
-export default function(theme = {}) {
-  const appStyle = { ...defaultStyle, ...theme };
+export default function (theme = {}) {
+  const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     header: {
       flexDirection: 'row',
@@ -46,6 +46,32 @@ export default function(theme = {}) {
       fontWeight: appStyle.textDayHeaderFontWeight,
       color: appStyle.textSectionTitleColor,
       backgroundColor: 'yellow',
+    },
+    // APPENG-BONG
+    todayBtnContainer: {
+      position: 'absolute',
+      top: 8,
+      right: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingLeft: 8,
+      width: 66,
+      height: 29,
+      borderRadius: 14.5,
+      elevation: 12,
+      backgroundColor: '#403a61',
+      shadowColor: 'rgba(0, 0, 0, 0.16)',
+      shadowOffset: {
+        width: 0,
+        height: 6,
+      },
+      shadowRadius: 5,
+      shadowOpacity: 1,
+    },
+    todayBtnIcon: {
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: 11,
     },
     ...(theme[STYLESHEET_ID] || {}),
   });

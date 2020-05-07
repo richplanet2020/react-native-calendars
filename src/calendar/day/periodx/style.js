@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import * as defaultStyle from '../../../style';
 
 const STYLESHEET_ID = 'stylesheet.day.period';
 const FILLER_HEIGHT = 24; // 34->24 bongki.choi
 
 export default function styleConstructor(theme = {}) {
-  const appStyle = { ...defaultStyle, ...theme };
+  const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     wrapper: {
       alignItems: 'center',

@@ -1,16 +1,22 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, View, TouchableOpacity, Text, Image} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
 const appIcon = require('../img/app-icon-120x120.png');
 const testIDs = require('../testIDs');
 
 export default class MenuScreen extends Component {
-
   render() {
     return (
       <View style={styles.container} testID={testIDs.menu.CONTAINER}>
-        <Image source={appIcon} style={styles.image}/>
+        <Image source={appIcon} style={styles.image} />
         <TouchableOpacity
           testID={testIDs.menu.CALENDARS}
           style={styles.menu}
@@ -59,21 +65,21 @@ export default class MenuScreen extends Component {
         options: {
           topBar: {
             title: {
-              text: screen
+              text: screen,
             },
             backButton: {
               accessibilityLabel: 'back',
               showTitle: false, // iOS only
-              color: Platform.OS === 'ios' ? '#2d4150' : undefined
-            }
-          }
-        }
-      }
+              color: Platform.OS === 'ios' ? '#2d4150' : undefined,
+            },
+          },
+        },
+      },
     });
   }
 
   onCalendarsPress() {
-    this.pushScreen('Calendars');
+    this.pushScreen('Calendarx');
   }
 
   onCalendarListPress() {
@@ -99,13 +105,13 @@ export default class MenuScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
-    alignItems: 'center'
+    flex: 1,
+    alignItems: 'center',
   },
   image: {
     margin: 30,
     width: 90,
-    height: 90
+    height: 90,
   },
   menu: {
     width: 300,
@@ -115,10 +121,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#7a92a5'
+    borderColor: '#7a92a5',
   },
   menuText: {
     fontSize: 18,
-    color: '#2d4150'
-  }
+    color: '#2d4150',
+  },
 });

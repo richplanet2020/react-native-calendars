@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
-import { ActivityIndicator, Platform } from 'react-native';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React, {Component} from 'react';
+import {
+  ActivityIndicator,
+  Platform,
+  TouchableNativeFeedback,
+} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import XDate from 'xdate';
 import PropTypes from 'prop-types';
 import styleConstructor from './style';
-import { weekDayNames } from '../../dateutils';
-import { CHANGE_MONTH_LEFT_ARROW, CHANGE_MONTH_RIGHT_ARROW } from '../../testIDs';
+import {weekDayNames} from '../../dateutils';
+import {CHANGE_MONTH_LEFT_ARROW, CHANGE_MONTH_RIGHT_ARROW} from '../../testIDs';
 
 class CalendarHeader extends Component {
   static displayName = 'IGNORE';
@@ -25,6 +29,7 @@ class CalendarHeader extends Component {
     disableArrowLeft: PropTypes.bool,
     disableArrowRight: PropTypes.bool,
     webAriaLevel: PropTypes.number,
+    scrollToMonth: PropTypes.func,
   };
 
   static defaultProps = {
@@ -50,7 +55,10 @@ class CalendarHeader extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.month.toString('yyyy MM') !== this.props.month.toString('yyyy MM')) {
+    if (
+      nextProps.month.toString('yyyy MM') !==
+      this.props.month.toString('yyyy MM')
+    ) {
       return true;
     }
     if (nextProps.showIndicator !== this.props.showIndicator) {
@@ -81,7 +89,7 @@ class CalendarHeader extends Component {
   }
 
   onPressLeft() {
-    const { onPressArrowLeft } = this.props;
+    const {onPressArrowLeft} = this.props;
     if (typeof onPressArrowLeft === 'function') {
       return onPressArrowLeft(this.substractMonth, this.props.month);
     }
@@ -89,7 +97,7 @@ class CalendarHeader extends Component {
   }
 
   onPressRight() {
-    const { onPressArrowRight } = this.props;
+    const {onPressArrowRight} = this.props;
     if (typeof onPressArrowRight === 'function') {
       return onPressArrowRight(this.addMonth, this.props.month);
     }
@@ -98,14 +106,16 @@ class CalendarHeader extends Component {
 
   // BONG APPEND
   render() {
-    let leftArrow = <View />;
-    let rightArrow = <View />;
     let weekDaysNames = weekDayNames(this.props.firstDay);
-    const { testID } = this.props;
+    const {testID} = this.props;
 
     let indicator;
     if (this.props.showIndicator) {
-      indicator = <ActivityIndicator color={this.props.theme && this.props.theme.indicatorColor} />;
+      indicator = (
+        <ActivityIndicator
+          color={this.props.theme && this.props.theme.indicatorColor}
+        />
+      );
     }
 
     let month = this.props.month.toString(this.props.monthFormat);
@@ -117,29 +127,48 @@ class CalendarHeader extends Component {
         style={this.props.style}
         accessible
         accessibilityRole={'adjustable'}
-        accessibilityActions={[{ name: 'increment', label: 'increment' }, { name: 'decrement', label: 'decrement' }]}
+        accessibilityActions={[
+          {name: 'increment', label: 'increment'},
+          {name: 'decrement', label: 'decrement'},
+        ]}
         onAccessibilityAction={this.onAccessibilityAction}
         accessibilityElementsHidden={this.props.accessibilityElementsHidden} // iOS
         importantForAccessibility={this.props.importantForAccessibility} // Android
       >
-        <View style={this.style.dayHeaderMondayContainer}>
-          <Text style={this.style.dayHeaderNowMonth}>{monthOnly}</Text>
-          <View style={this.style.dayHeaderNowYearContainer}>
-            <Text style={this.style.dayHeaderArrow}>월 · {yearOnly}</Text>
-            <View style={this.style.dayHeaderArrowIcon}>
-              <Image style={{}} source={require('../img/IC_Open_S_N.png')} />
+        {/* [BONG APPEND] Header Style */}
+        <TouchableNativeFeedback
+          testID={`${testID}`}
+          onPress={() => {
+            this.props.scrollToMonth(XDate());
+          }}>
+          <View style={this.style.dayHeaderMondayContainer}>
+            <Text style={this.style.dayHeaderNowMonth}>{monthOnly}</Text>
+            <View style={this.style.dayHeaderNowYearContainer}>
+              <Text style={this.style.dayHeaderArrow}>월 · {yearOnly}</Text>
+              <View style={this.style.dayHeaderArrowIcon}>
+                <Image style={{}} source={require('../img/IC_Open_S_N.png')} />
+              </View>
+            </View>
+            <View style={this.style.todayBtnContainer}>
+              <Image source={require('../../img/icPrevSF.png')} />
+              <Text style={this.style.todayBtnIcon}>오늘</Text>
             </View>
           </View>
-        </View>
+        </TouchableNativeFeedback>
 
         {!this.props.hideDayNames && (
           <View style={this.style.week}>
-            {this.props.weekNumbers && <Text allowFontScaling={false} style={this.style.dayHeader} />}
+            {this.props.weekNumbers && (
+              <Text allowFontScaling={false} style={this.style.dayHeader} />
+            )}
             {weekDaysNames.map((day, idx) => (
               <Text
                 allowFontScaling={false}
                 key={idx}
-                style={this.style.dayHeader}
+                style={
+                  ([this.style.dayHeader],
+                  idx == 0 || idx == 6 ? [{color: 'red'}] : []) // 요일별 색깔 표기  APPEND BONG.
+                }
                 numberOfLines={1}
                 accessibilityLabel={''}
                 // accessible={false} // not working
@@ -159,7 +188,7 @@ class CalendarHeader extends Component {
     let leftArrow = <View />;
     let rightArrow = <View />;
     let weekDaysNames = weekDayNames(this.props.firstDay);
-    const { testID } = this.props;
+    const {testID} = this.props;
 
     if (!this.props.hideArrows) {
       leftArrow = (
@@ -167,14 +196,22 @@ class CalendarHeader extends Component {
           onPress={this.onPressLeft}
           disabled={this.props.disableArrowLeft}
           style={this.style.arrow}
-          hitSlop={{ left: 20, right: 20, top: 20, bottom: 20 }}
-          testID={testID ? `${CHANGE_MONTH_LEFT_ARROW}-${testID}` : CHANGE_MONTH_LEFT_ARROW}>
+          hitSlop={{left: 20, right: 20, top: 20, bottom: 20}}
+          testID={
+            testID
+              ? `${CHANGE_MONTH_LEFT_ARROW}-${testID}`
+              : CHANGE_MONTH_LEFT_ARROW
+          }>
           {this.props.renderArrow ? (
             this.props.renderArrow('left')
           ) : (
             <Image
               source={require('../img/previous.png')}
-              style={this.props.disableArrowLeft ? this.style.disabledArrowImage : this.style.arrowImage}
+              style={
+                this.props.disableArrowLeft
+                  ? this.style.disabledArrowImage
+                  : this.style.arrowImage
+              }
             />
           )}
         </TouchableOpacity>
@@ -184,14 +221,22 @@ class CalendarHeader extends Component {
           onPress={this.onPressRight}
           disabled={this.props.disableArrowRight}
           style={this.style.arrow}
-          hitSlop={{ left: 20, right: 20, top: 20, bottom: 20 }}
-          testID={testID ? `${CHANGE_MONTH_RIGHT_ARROW}-${testID}` : CHANGE_MONTH_RIGHT_ARROW}>
+          hitSlop={{left: 20, right: 20, top: 20, bottom: 20}}
+          testID={
+            testID
+              ? `${CHANGE_MONTH_RIGHT_ARROW}-${testID}`
+              : CHANGE_MONTH_RIGHT_ARROW
+          }>
           {this.props.renderArrow ? (
             this.props.renderArrow('right')
           ) : (
             <Image
               source={require('../img/next.png')}
-              style={this.props.disableArrowRight ? this.style.disabledArrowImage : this.style.arrowImage}
+              style={
+                this.props.disableArrowRight
+                  ? this.style.disabledArrowImage
+                  : this.style.arrowImage
+              }
             />
           )}
         </TouchableOpacity>
@@ -200,25 +245,36 @@ class CalendarHeader extends Component {
 
     let indicator;
     if (this.props.showIndicator) {
-      indicator = <ActivityIndicator color={this.props.theme && this.props.theme.indicatorColor} />;
+      indicator = (
+        <ActivityIndicator
+          color={this.props.theme && this.props.theme.indicatorColor}
+        />
+      );
     }
 
-    const webProps = Platform.OS === 'web' ? { 'aria-level': this.props.webAriaLevel } : {};
+    const webProps =
+      Platform.OS === 'web' ? {'aria-level': this.props.webAriaLevel} : {};
 
     return (
       <View
         style={this.props.style}
         accessible
         accessibilityRole={'adjustable'}
-        accessibilityActions={[{ name: 'increment', label: 'increment' }, { name: 'decrement', label: 'decrement' }]}
+        accessibilityActions={[
+          {name: 'increment', label: 'increment'},
+          {name: 'decrement', label: 'decrement'},
+        ]}
         onAccessibilityAction={this.onAccessibilityAction}
         accessibilityElementsHidden={this.props.accessibilityElementsHidden} // iOS
         importantForAccessibility={this.props.importantForAccessibility} // Android
       >
         <View style={this.style.header}>
           {leftArrow}
-          <View style={{ flexDirection: 'row' }}>
-            <Text allowFontScaling={false} style={this.style.monthText} {...webProps}>
+          <View style={{flexDirection: 'row'}}>
+            <Text
+              allowFontScaling={false}
+              style={this.style.monthText}
+              {...webProps}>
               {this.props.month.toString(this.props.monthFormat)}
             </Text>
             {indicator}
@@ -227,7 +283,9 @@ class CalendarHeader extends Component {
         </View>
         {!this.props.hideDayNames && (
           <View style={this.style.week}>
-            {this.props.weekNumbers && <Text allowFontScaling={false} style={this.style.dayHeader} />}
+            {this.props.weekNumbers && (
+              <Text allowFontScaling={false} style={this.style.dayHeader} />
+            )}
             {weekDaysNames.map((day, idx) => (
               <Text
                 allowFontScaling={false}
@@ -247,7 +305,7 @@ class CalendarHeader extends Component {
     );
   }
 
-  onAccessibilityAction = event => {
+  onAccessibilityAction = (event) => {
     switch (event.nativeEvent.actionName) {
       case 'decrement':
         this.onPressLeft();

@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { TouchableWithoutFeedback, Text, View, Image } from 'react-native';
-import { shouldUpdate } from '../../../component-updater';
+import React, {Component} from 'react';
+import {TouchableWithoutFeedback, Text, View} from 'react-native';
+import {shouldUpdate} from '../../../component-updater';
 
 import * as defaultStyle from '../../../style';
 import styleConstructor from './style';
+import {styles, iconList as ICON_LIST} from './icons';
 
 class Day extends Component {
   static displayName = 'IGNORE';
@@ -19,13 +20,14 @@ class Day extends Component {
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
     date: PropTypes.object,
+    id: PropTypes.number, // APPEND BONG
     markingExists: PropTypes.bool,
   };
 
   constructor(props) {
     super(props);
 
-    this.theme = { ...defaultStyle, ...(props.theme || {}) };
+    this.theme = {...defaultStyle, ...(props.theme || {})};
     this.style = styleConstructor(props.theme);
 
     this.markingStyle = this.getDrawingStyle(props.marking || []);
@@ -49,11 +51,16 @@ class Day extends Component {
       return true;
     }
 
-    return shouldUpdate(this.props, nextProps, ['state', 'children', 'onPress', 'onLongPress']);
+    return shouldUpdate(this.props, nextProps, [
+      'state',
+      'children',
+      'onPress',
+      'onLongPress',
+    ]);
   }
 
   getDrawingStyle(marking) {
-    const defaultStyle = { textStyle: {} };
+    const defaultStyle = {textStyle: {}};
     if (!marking) {
       return defaultStyle;
     }
@@ -109,66 +116,40 @@ class Day extends Component {
     return resultStyle;
   }
 
-  // APPEND BONG.
+  // [APPEND BONG] BADGE 영역 표기하기
   crateBage = () => {
+    let IconArrs = [];
     if (this.props.marking.dayEvent) {
-      let IconArrs = [];
       let IconArrsProps = this.props.marking.dayEvent.icons;
       if (IconArrsProps && IconArrsProps.length > 0) {
-        _(IconArrsProps).each(function(item, idx) {
-          if (item === 'agnoy') {
-            IconArrs.push(<Image style={{ height: 12, width: 12 }} source={require('../../img/B_IC_Agony_S_N.png')} />);
-          }
-          if (item === 'alarm') {
-            IconArrs.push(<Image style={{ height: 12, width: 12 }} source={require('../../img/B_IC_Alarm_S_N.png')} />);
-          }
-          if (item === 'bleeding') {
+        _(IconArrsProps).each(function (item, idx) {
+          if (IconArrs.length < 2) {
+            ICON_LIST[item] && IconArrs.push(ICON_LIST[item]);
+          } else if (IconArrs.length === 2 && IconArrsProps.length >= 3) {
             IconArrs.push(
-              <Image style={{ height: 12, width: 12 }} source={require('../../img/B_IC_Bleedingx1_S_N.png')} />,
+              <Text style={styles.iconTextStyle}>
+                +{IconArrsProps.length - 2}
+              </Text>,
             );
           }
         });
       }
-
-      return (
-        <View
-          style={{
-            height: 12,
-            width: 40,
-            //paddingTop: 13,
-            //justifyContent: 'space-around',
-            //backgroundColor: 'blue',
-            flexDirection: 'row',
-          }}>
-          {IconArrs}
-        </View>
-      );
     }
-
-    return (
-      <View
-        style={{
-          height: 12,
-          width: 40,
-          //paddingTop: 13,
-          justifyContent: 'space-between',
-          //backgroundColor: 'blue',
-          flexDirection: 'row',
-        }}
-      />
-    );
+    return <View style={styles.iconContainer}>{IconArrs}</View>;
   };
 
+  // [APPEND BONG] TEXT 영역 표기하기
   createText = () => {
     if (this.props.marking.dayEvent) {
       return (
-        <View style={{ height: 15, width: 40 }}>
-          <Text style={{ fontSize: 10 }}>{this.props.marking.dayEvent.name}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.textStyle}>
+            {this.props.marking.dayEvent.name}
+          </Text>
         </View>
       );
     }
-
-    return <View style={{ height: 15, width: 40 }} />;
+    return <View style={styles.textContainer} />;
   };
 
   render() {
@@ -178,38 +159,24 @@ class Day extends Component {
     let rightFillerStyle = {};
     let fillerStyle = {};
     let fillers;
-    // ADD BONG.
-    let dayTextContainer = [
-      {
-        width: 24,
-        height: 24,
-        //backgroundColor: '#403a61',
-        borderRadius: 12,
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-      },
-    ];
+    // [APPEND BONG] 날짜 기본 스타일 정의
+    let dayTextContainer = [];
+    dayTextContainer.push(_.clone(styles.selectedStyle));
+
+    // [FOR TEST] : 기본적으로 borderRadius: 17이 좌/우 잡힘
+    //containerStyle.push([{backgroundColor: 'red'}]);
 
     if (this.props.state === 'disabled') {
-      // 이전, 다음달 날짜인 경우
-      console.log('Marking Selected ===> ' + String(this.props.children));
-      textStyle.push(this.style.disabledText);
-    }
-    //else if (this.props.state === 'today') {
-    else if (this.props.marking.selected) {
-      // 오늘 날짜인 경우
-      console.log('===>' + this.props.state);
-      containerStyle.push(this.style.today);
+      // [APPEND BONG] 이전, 다음달 날짜이면 Disabled 색깔 표기
+      textStyle.push({color: '#e6e6e6'});
+    } else if (this.props.marking.selected) {
       textStyle.push(this.style.todayText);
-
-      //ADD BONG.
-      //textStyle.push([{backgroundColor: 'red'}]);
-      dayTextContainer.push({ backgroundColor: 'blue' });
-      if (this.props.marking.dayEvent) {
-        console.log('======>' + this.props.marking.dayEvent.name);
-      }
+      containerStyle.push(this.style.today);
+      // [APPEND BONG] 선택한 날짜인경우
+      dayTextContainer.push({backgroundColor: '#403a61'});
     }
+
+    //console.log(JSON.stringify(this.props.marking));
 
     if (this.props.marking) {
       containerStyle.push({
@@ -217,6 +184,7 @@ class Day extends Component {
       });
 
       const flags = this.markingStyle;
+      //console.log('flag=' + JSON.stringify(flags));
       if (flags.textStyle) {
         textStyle.push(flags.textStyle);
       }
@@ -251,10 +219,10 @@ class Day extends Component {
           backgroundColor: flags.endingDay.color,
         });
       } else if (flags.day) {
-        leftFillerStyle = { backgroundColor: flags.day.color };
-        rightFillerStyle = { backgroundColor: flags.day.color };
+        leftFillerStyle = {backgroundColor: flags.day.color};
+        rightFillerStyle = {backgroundColor: flags.day.color};
         // #177 bug
-        fillerStyle = { backgroundColor: flags.day.color };
+        fillerStyle = {backgroundColor: flags.day.color};
       } else if (flags.endingDay && flags.startingDay) {
         rightFillerStyle = {
           backgroundColor: this.theme.calendarBackground,
@@ -267,6 +235,19 @@ class Day extends Component {
         });
       }
 
+      // console.log(
+      //   'filterStyle=' + JSON.stringify([this.style.fillers, fillerStyle]),
+      // );
+      // console.log(
+      //   'leftFillerStyle=' +
+      //     JSON.stringify([this.style.leftFiller, leftFillerStyle]),
+      // );
+      // console.log(
+      //   'rightFillerStyle=' +
+      //     JSON.stringify([this.style.rightFiller, rightFillerStyle]),
+      // );
+      // console.log('---');
+
       fillers = (
         <View style={[this.style.fillers, fillerStyle]}>
           <View style={[this.style.leftFiller, leftFillerStyle]} />
@@ -275,9 +256,18 @@ class Day extends Component {
       );
     }
 
-    containerStyle.push([{ width: 40, height: 24, textAlign: 'center' }]);
+    containerStyle.push([{width: 40, height: 24, textAlign: 'center'}]);
 
-    //console.log(String(this.props.children) + ',' + JSON.stringify(textStyle));
+    // =============================================
+    // [APPEND BONG.] 휴일 색깔 표시, 현재 달만 색깔이 들어감
+    if (
+      this.props.state != 'disabled' &&
+      (this.props.id === 0 || this.props.id === 6)
+    ) {
+      textStyle.push({color: 'red'});
+    }
+
+    //console.log(JSON.stringify(containerStyle));
 
     return (
       <TouchableWithoutFeedback
@@ -286,7 +276,9 @@ class Day extends Component {
         onLongPress={this.onDayLongPress}
         disabled={this.props.marking.disableTouchEvent}
         accessible
-        accessibilityRole={this.props.marking.disableTouchEvent ? undefined : 'button'}
+        accessibilityRole={
+          this.props.marking.disableTouchEvent ? undefined : 'button'
+        }
         accessibilityLabel={this.props.accessibilityLabel}>
         <View style={this.style.wrapper}>
           {fillers}
@@ -297,110 +289,10 @@ class Day extends Component {
               </Text>
             </View>
           </View>
-          {/* 중간 메모 영역 / APPEND BONG. */}
+          {/* 중간 메모 영역 | APPEND BONG. */}
           {this.createText()}
-          {/* 배지 영역 / APPEND BONG. */}
+          {/* 배지 영역 | APPEND BONG. */}
           {this.crateBage()}
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  }
-
-  renderOri() {
-    const containerStyle = [this.style.base];
-    const textStyle = [this.style.text];
-    let leftFillerStyle = {};
-    let rightFillerStyle = {};
-    let fillerStyle = {};
-    let fillers;
-
-    if (this.props.state === 'disabled') {
-      textStyle.push(this.style.disabledText);
-    } else if (this.props.state === 'today') {
-      containerStyle.push(this.style.today);
-      textStyle.push(this.style.todayText);
-    }
-
-    if (this.props.marking) {
-      containerStyle.push({
-        borderRadius: 17,
-      });
-
-      const flags = this.markingStyle;
-      if (flags.textStyle) {
-        textStyle.push(flags.textStyle);
-      }
-      if (flags.containerStyle) {
-        containerStyle.push(flags.containerStyle);
-      }
-      if (flags.leftFillerStyle) {
-        leftFillerStyle.backgroundColor = flags.leftFillerStyle;
-      }
-      if (flags.rightFillerStyle) {
-        rightFillerStyle.backgroundColor = flags.rightFillerStyle;
-      }
-
-      if (flags.startingDay && !flags.endingDay) {
-        leftFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
-        };
-        rightFillerStyle = {
-          backgroundColor: flags.startingDay.color,
-        };
-        containerStyle.push({
-          backgroundColor: flags.startingDay.color,
-        });
-      } else if (flags.endingDay && !flags.startingDay) {
-        rightFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
-        };
-        leftFillerStyle = {
-          backgroundColor: flags.endingDay.color,
-        };
-        containerStyle.push({
-          backgroundColor: flags.endingDay.color,
-        });
-      } else if (flags.day) {
-        leftFillerStyle = { backgroundColor: flags.day.color };
-        rightFillerStyle = { backgroundColor: flags.day.color };
-        // #177 bug
-        fillerStyle = { backgroundColor: flags.day.color };
-      } else if (flags.endingDay && flags.startingDay) {
-        rightFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
-        };
-        leftFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
-        };
-        containerStyle.push({
-          backgroundColor: flags.endingDay.color,
-        });
-      }
-
-      fillers = (
-        <View style={[this.style.fillers, fillerStyle]}>
-          <View style={[this.style.leftFiller, leftFillerStyle]} />
-          <View style={[this.style.rightFiller, rightFillerStyle]} />
-        </View>
-      );
-    }
-
-    return (
-      <TouchableWithoutFeedback
-        testID={this.props.testID}
-        onPress={this.onDayPress}
-        onLongPress={this.onDayLongPress}
-        disabled={this.props.marking.disableTouchEvent}
-        accessible
-        accessibilityRole={this.props.marking.disableTouchEvent ? undefined : 'button'}
-        accessibilityLabel={this.props.accessibilityLabel}>
-        <View style={this.style.wrapper}>
-          {fillers}
-          <View style={containerStyle}>
-            <Text allowFontScaling={false} style={textStyle}>
-              {String(this.props.children)}
-            </Text>
-          </View>
         </View>
       </TouchableWithoutFeedback>
     );

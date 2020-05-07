@@ -234,6 +234,15 @@ class CalendarList extends Component {
       this.props.onVisibleMonthsChange(visibleMonths);
     }
 
+    // [APPEND BONG.]
+    // 월변경 알림 전파, 좌우 버튼이 벼경되어 대체됨.
+    const prev = Number(this.state.currentMonth);
+    const next = Number(parseDate(visibleMonths[0]));
+    if (prev != next) {
+      //console.log('월변경됨 =' + parseDate(visibleMonths[0]).toString());
+      this.props.onMonthChange(xdateToData(parseDate(visibleMonths[0])));
+    }
+
     this.setState({
       rows: newrows,
       currentMonth: parseDate(visibleMonths[0]),
@@ -337,6 +346,7 @@ class CalendarList extends Component {
           testID={STATIC_HEADER}
           accessibilityElementsHidden={true} // iOS
           importantForAccessibility={'no-hide-descendants'} // Android
+          scrollToMonth={this.scrollToMonth.bind(this)} // APPEND BONG
         />
       );
     }
@@ -375,7 +385,9 @@ class CalendarList extends Component {
           getItemLayout={this.getItemLayout}
           scrollsToTop={this.props.scrollsToTop}
           onEndReachedThreshold={this.props.onEndReachedThreshold}
+          //onEndRechedThreadhold={() => console.log('onEndRechedThreadHold => ')}
           onEndReached={this.props.onEndReached}
+          //onEndReached={() => console.log('Reched...')}
           keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
         />
         {this.renderStaticHeader()}
