@@ -30,201 +30,236 @@ const styles = StyleSheet.create({
 });
 
 const iconList = {
+  // 생리(I01)
   I01: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcMensN.png')}
     />
   ),
+  // 생리종료(I02)
   I02: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcMensEndN.png')}
     />
   ),
-  I03: (
+  // 부정출혈(I03)
+  BL09: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcBleedingArrhythmiaN.png')}
     />
   ),
-  I04: (
+  // 출혈(적음)(I04)
+  BL01: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcBleedingx1N.png')}
     />
   ),
-  I05: (
+  // 출혈(보통)(I05)
+  BL02: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcBleedingx5N.png')}
     />
   ),
-  I06: (
+  // 출혈(많음)(I06)
+  BL03: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcBleedingx10N.png')}
     />
   ),
-  I07: (
+  // 통증(없음)
+  PA01: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcPainlessN.png')}
     />
   ),
-  I08: (
+  // 통증(보통)
+  PA02: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcPainN.png')}
     />
   ),
-  I09: (
+  // 통증(심함)
+  PA03: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcAgonyN.png')}
     />
   ),
-  I10: (
+  // 피임(I10)
+  LO01: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcContraceptionN.png')}
     />
   ),
-  I11: (
+  // 피임안함(I11)
+  LO02: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcNoContraceptionN.png')}
     />
   ),
-  I12: (
+  // 체외사정(I12)
+  LO03: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcSexExternalN.png')}
     />
   ),
+  // 일정(I13)
   I13: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcScheduleN.png')}
     />
   ),
-  I14: (
+  // 예방접종(I14)
+  vac: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcVaccineN.png')}
     />
   ),
-  I15: (
+  // 약복용(I15)
+  drug: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcMedicineN.png')}
     />
   ),
+  // 사랑(I16)
   I16: (
     <Image style={styles.iconStyle} source={require('../../img/bIcSexN.png')} />
   ),
-  I17: (
+  // 병원진료(I17)
+  trt: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcHospitalN.png')}
     />
   ),
+  // 알림(I18)
   I18: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcNotificationN.png')}
     />
   ),
-  I19: (
+  // 배란테스트(I19)
+  ovu: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcOvulationTestKitN.png')}
     />
   ),
-  I20: (
+  // 임신테스트(I20)
+  pre: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcPregTestKitN.png')}
     />
   ),
-  I21: (
+  // 기초체온(I21)
+  tem: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcThermoN.png')}
     />
   ),
-  I22: (
+  // 인공수정(I22)
+  iui: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcInVivoN.png')}
     />
   ),
-  I23: (
+  // 시험관시술(I23)
+  ivf: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcInVitroN.png')}
     />
   ),
+  // 소화불량(I24)
   I24: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcDigestantN.png')}
     />
   ),
+  // 체중기록(I25)
   I25: (
     <Image style={styles.iconStyle} source={require('../../img/bIcBmiN.png')} />
   ),
+  // 알람(I26)
   I26: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcAlarmN.png')}
     />
   ),
+  // 감기(I27)
   I27: (
     <Image style={styles.iconStyle} source={require('../../img/bIcFluN.png')} />
   ),
+  // 두통(I28)
   I28: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcHeadacheN.png')}
     />
   ),
+  // 메모(I29)
   I29: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcMemoN.png')}
     />
   ),
+  // 한약(I30)
   I30: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcOrientalMedicineN.png')}
     />
   ),
+  // 알약(I31)
   I31: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcPainRelieverN.png')}
     />
   ),
+  // 피임약(I32)
   I32: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcPillN.png')}
     />
   ),
+  // 초음파사진(I33)
   I33: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcSonogramN.png')}
     />
   ),
+  // 공사중(I34)
   I34: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcUnderConN.png')}
     />
   ),
+  // 배란(I35)
   I35: (
     <Image
       style={styles.iconStyle}

@@ -123,9 +123,10 @@ class Day extends Component {
       let IconArrsProps = this.props.marking.dayEvent.icons;
       if (IconArrsProps && IconArrsProps.length > 0) {
         _(IconArrsProps).each(function (item, idx) {
-          if (IconArrs.length < 2) {
+          if (IconArrs.length < 3) {
             ICON_LIST[item] && IconArrs.push(ICON_LIST[item]);
-          } else if (IconArrs.length === 2 && IconArrsProps.length >= 3) {
+          } else if (IconArrsProps.length > 3) {
+            IconArrs.pop();
             IconArrs.push(
               <Text style={styles.iconTextStyle}>
                 +{IconArrsProps.length - 2}
