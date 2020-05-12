@@ -350,6 +350,8 @@ class Calendar extends Component {
       }
     }
 
+    //console.log('headerStyle->' + JSON.stringify(this.props.headerStyle));
+
     return (
       <View
         style={[this.style.container, this.props.style]}
@@ -375,6 +377,7 @@ class Calendar extends Component {
           webAriaLevel={this.props.webAriaLevel}
           disableArrowLeft={this.props.disableArrowLeft}
           disableArrowRight={this.props.disableArrowRight}
+          markingType={this.props.markingType}
         />
         <View style={this.style.monthView}>{weeks}</View>
       </View>
