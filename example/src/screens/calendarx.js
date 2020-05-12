@@ -114,6 +114,7 @@ export default class CalendarxScreen extends Component {
         startingDay: true,
         endingDay: true,
         color: 'green',
+        //selected: true,
       },
       '2020-05-31': {
         //selected: true,
@@ -124,6 +125,9 @@ export default class CalendarxScreen extends Component {
           name: '배란예정일',
           icons: ['drug', 'trt', 'tem'],
         },
+      },
+      '2020-06-05': {
+        today: true,
       },
     };
 
@@ -165,7 +169,7 @@ export default class CalendarxScreen extends Component {
           onMonthChange={(month: string) => {
             //console.log('month changed', month);
             //console.log('month date', month.dateString);
-            this.setState({selected: month.dateString});
+            //this.setState({selected: month.dateString});
           }}
           hideArrows={true}
           //showWeekNumbers={true} // ADD BONG. 주번호

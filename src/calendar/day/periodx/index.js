@@ -167,6 +167,15 @@ class Day extends Component {
     // [FOR TEST] : 기본적으로 borderRadius: 17이 좌/우 잡힘
     //containerStyle.push([{backgroundColor: 'red'}]);
 
+    // =============================================
+    // [APPEND BONG.] 휴일 색깔 표시, 현재 달만 색깔이 들어감
+    if (
+      this.props.state != 'disabled' &&
+      (this.props.id === 0 || this.props.id === 6)
+    ) {
+      textStyle.push({color: 'red'});
+    }
+
     if (this.props.state === 'disabled') {
       // [APPEND BONG] 이전, 다음달 날짜이면 Disabled 색깔 표기
       textStyle.push({color: '#e6e6e6'});
@@ -174,6 +183,10 @@ class Day extends Component {
       textStyle.push(this.style.todayText);
       containerStyle.push(this.style.today);
       // [APPEND BONG] 선택한 날짜인경우
+      dayTextContainer.push({backgroundColor: '#ff7200'});
+    } else if (this.props.state === 'today') {
+      containerStyle.push(this.style.today);
+      textStyle.push(this.style.todayText);
       dayTextContainer.push({backgroundColor: '#403a61'});
     }
 
@@ -258,17 +271,6 @@ class Day extends Component {
     }
 
     containerStyle.push([{width: 40, height: 24, textAlign: 'center'}]);
-
-    // =============================================
-    // [APPEND BONG.] 휴일 색깔 표시, 현재 달만 색깔이 들어감
-    if (
-      this.props.state != 'disabled' &&
-      (this.props.id === 0 || this.props.id === 6)
-    ) {
-      textStyle.push({color: 'red'});
-    }
-
-    //console.log(JSON.stringify(containerStyle));
 
     return (
       <TouchableWithoutFeedback
