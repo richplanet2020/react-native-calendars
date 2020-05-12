@@ -30,6 +30,7 @@ class CalendarHeader extends Component {
     disableArrowRight: PropTypes.bool,
     webAriaLevel: PropTypes.number,
     scrollToMonth: PropTypes.func,
+    markingType: PropTypes.string, // [APPEND BONG.]
   };
 
   static defaultProps = {
@@ -104,8 +105,15 @@ class CalendarHeader extends Component {
     return this.addMonth();
   }
 
-  // BONG APPEND
   render() {
+    if (this.props.markingType === 'periodx') {
+      return this.renderPriodX();
+    }
+    return this.renderOri();
+  }
+
+  // [BONG APPEND]
+  renderPriodX() {
     let weekDaysNames = weekDayNames(this.props.firstDay);
     const {testID} = this.props;
 
@@ -165,10 +173,10 @@ class CalendarHeader extends Component {
               <Text
                 allowFontScaling={false}
                 key={idx}
-                style={
-                  ([this.style.dayHeader],
-                  idx == 0 || idx == 6 ? [{color: 'red'}] : []) // 요일별 색깔 표기  APPEND BONG.
-                }
+                style={[
+                  {...this.style.dayHeader},
+                  idx === 0 || idx === 6 ? {color: '#f08b76'} : {},
+                ]}
                 numberOfLines={1}
                 accessibilityLabel={''}
                 // accessible={false} // not working

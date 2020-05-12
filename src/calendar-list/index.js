@@ -234,12 +234,11 @@ class CalendarList extends Component {
       this.props.onVisibleMonthsChange(visibleMonths);
     }
 
-    // [APPEND BONG.]
-    // 월변경 알림 전파, 좌우 버튼이 벼경되어 대체됨.
+    // [APPEND BONG]
+    // 월변경 알림 전파, 좌우 버튼이 변경되어 대체됨.
     const prev = Number(this.state.currentMonth);
     const next = Number(parseDate(visibleMonths[0]));
-    if (prev != next) {
-      //console.log('월변경됨 =' + parseDate(visibleMonths[0]).toString());
+    if (prev != next && typeof this.props.onMonthChange === 'function') {
       this.props.onMonthChange(xdateToData(parseDate(visibleMonths[0])));
     }
 
@@ -346,7 +345,8 @@ class CalendarList extends Component {
           testID={STATIC_HEADER}
           accessibilityElementsHidden={true} // iOS
           importantForAccessibility={'no-hide-descendants'} // Android
-          scrollToMonth={this.scrollToMonth.bind(this)} // APPEND BONG
+          scrollToMonth={this.scrollToMonth.bind(this)} // [APPEND BONG]
+          markingType={this.props.markingType} // [APPEND BONG]
         />
       );
     }

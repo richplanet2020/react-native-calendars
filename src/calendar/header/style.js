@@ -45,7 +45,6 @@ export default function (theme = {}) {
       fontFamily: appStyle.textDayHeaderFontFamily,
       fontWeight: appStyle.textDayHeaderFontWeight,
       color: appStyle.textSectionTitleColor,
-      backgroundColor: 'yellow',
     },
     // APPENG-BONG
     todayBtnContainer: {
