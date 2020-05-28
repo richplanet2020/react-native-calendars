@@ -89,6 +89,8 @@ class Calendar extends Component {
     ]),
     /** Provide aria-level for calendar heading for proper accessibility when used with web (react-native-web) */
     webAriaLevel: PropTypes.number,
+    /** change calendar init date */
+    onRessChangeInitDate: PropTypes.func,
   };
 
   constructor(props) {

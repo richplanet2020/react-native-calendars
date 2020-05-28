@@ -347,6 +347,7 @@ class CalendarList extends Component {
           importantForAccessibility={'no-hide-descendants'} // Android
           scrollToMonth={this.scrollToMonth.bind(this)} // [APPEND BONG]
           markingType={this.props.markingType} // [APPEND BONG]
+          onRessChangeInitDate={this.props.onRessChangeInitDate} // [APPEND BONG]
         />
       );
     }

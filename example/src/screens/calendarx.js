@@ -171,6 +171,9 @@ export default class CalendarxScreen extends Component {
             //console.log('month date', month.dateString);
             //this.setState({selected: month.dateString});
           }}
+          onRessChangeInitDate={(ty) =>
+            console.log(`--- onRessChangeInitDate:(${ty}) --- `)
+          }
           hideArrows={true}
           //showWeekNumbers={true} // ADD BONG. 주번호
           markedDates={this.getMarkedDates()}
