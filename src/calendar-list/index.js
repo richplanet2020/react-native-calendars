@@ -5,6 +5,7 @@ import {
   Dimensions,
   ActivityIndicator,
   View,
+  Image,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
@@ -212,9 +213,11 @@ class CalendarList extends Component {
     const rowclone = this.state.rows;
     const newrows = [];
     const visibleMonths = [];
+    console.log(`rowclone.length ===> ${rowclone.length}`);
 
     for (let i = 0; i < rowclone.length; i++) {
       let val = rowclone[i];
+
       const rowShouldBeRendered = rowIsCloseToViewable(i, 1);
 
       if (rowShouldBeRendered && !rowclone[i].getTime) {
@@ -236,6 +239,11 @@ class CalendarList extends Component {
 
     // [APPEND BONG]
     // 월변경 알림 전파, 좌우 버튼이 변경되어 대체됨.
+
+    if (visibleMonths.length == 0) {
+      return;
+    }
+
     const prev = Number(this.state.currentMonth);
     const next = Number(parseDate(visibleMonths[0]));
     if (prev != next && typeof this.props.onMonthChange === 'function') {

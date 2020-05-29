@@ -160,20 +160,27 @@ export default class CalendarxScreen extends Component {
           staticHeader // ADD BONG. 위에 정적 헤더를 덮는다.
           hideExtraDays={false} // ADD BONG. 이전 다음달 일은 회색 처리한다.
           onDayPress={(day) => {
-            //console.log(day);
-            this.setState({selected: day.dateString});
+            //this.setState({selected: day.dateString});
             //this.calendar.scrollToMonth(XDate('2020-09-10'));
           }} // ADD BONG. 날짜를 누른경우
           onDayLongPress={(day) => console.log(day)} // ADD BONG. 날짜를 길게 누른경우
           monthFormat={'yyyy MM'} // ADD BONG. 렌더링 안된 달 표기 방식
-          onMonthChange={(month: string) => {
+          onMonthChange={(month) => {
             //console.log('month changed', month);
             //console.log('month date', month.dateString);
+            const firstMonthDay = month.dateString
+              .split('-')
+              .slice(0, 2)
+              .join('-')
+              .concat('-01');
             //this.setState({selected: month.dateString});
           }}
-          onRessChangeInitDate={(ty) =>
-            console.log(`--- onRessChangeInitDate:(${ty}) --- `)
-          }
+          onRessChangeInitDate={(ty) => {
+            console.log(`--- onRessChangeInitDate:(${ty}) --- `);
+            if (ty === 'today') {
+              this.calendar.scrollToMonth(new Date());
+            }
+          }}
           hideArrows={true}
           //showWeekNumbers={true} // ADD BONG. 주번호
           markedDates={this.getMarkedDates()}
