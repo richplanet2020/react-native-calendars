@@ -123,7 +123,8 @@ export default class CalendarxScreen extends Component {
         selected: true,
         dayEvent: {
           name: '배란예정일',
-          icons: ['drug', 'trt', 'tem'],
+          //icons: ['drug', 'trt', 'tem'],
+          icons: ['', '', '', 'drg'],
         },
       },
       '2020-06-05': {

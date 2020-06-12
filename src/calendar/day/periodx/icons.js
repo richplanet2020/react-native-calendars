@@ -129,7 +129,7 @@ const iconList = {
     />
   ),
   // 약복용(I15)
-  drug: (
+  drg: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcMedicineN.png')}
