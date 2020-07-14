@@ -213,7 +213,6 @@ class CalendarList extends Component {
     const rowclone = this.state.rows;
     const newrows = [];
     const visibleMonths = [];
-    console.log(`rowclone.length ===> ${rowclone.length}`);
 
     for (let i = 0; i < rowclone.length; i++) {
       let val = rowclone[i];

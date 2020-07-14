@@ -136,7 +136,7 @@ const iconList = {
     />
   ),
   // 사랑(I16)
-  I16: (
+  lov: (
     <Image style={styles.iconStyle} source={require('../../img/bIcSexN.png')} />
   ),
   // 병원진료(I17)
@@ -196,7 +196,7 @@ const iconList = {
     />
   ),
   // 체중기록(I25)
-  I25: (
+  wt: (
     <Image style={styles.iconStyle} source={require('../../img/bIcBmiN.png')} />
   ),
   // 알람(I26)
@@ -218,7 +218,7 @@ const iconList = {
     />
   ),
   // 메모(I29)
-  I29: (
+  mem: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcMemoN.png')}
@@ -246,7 +246,14 @@ const iconList = {
     />
   ),
   // 초음파사진(I33)
-  I33: (
+  emh: (
+    <Image
+      style={styles.iconStyle}
+      source={require('../../img/bIcSonogramN.png')}
+    />
+  ),
+  // 초음파사진(I33)
+  emp: (
     <Image
       style={styles.iconStyle}
       source={require('../../img/bIcSonogramN.png')}

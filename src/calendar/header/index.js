@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
   ActivityIndicator,
   Platform,
-  TouchableNativeFeedback,
   TouchableWithoutFeedback,
 } from 'react-native';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
@@ -11,6 +10,7 @@ import PropTypes from 'prop-types';
 import styleConstructor from './style';
 import {weekDayNames} from '../../dateutils';
 import {CHANGE_MONTH_LEFT_ARROW, CHANGE_MONTH_RIGHT_ARROW} from '../../testIDs';
+import {diff} from 'semver';
 
 class CalendarHeader extends Component {
   static displayName = 'IGNORE';
@@ -132,6 +132,10 @@ class CalendarHeader extends Component {
     let monthOnly = new Number(month.split(' ')[1]).toString();
     let yearOnly = new Number(month.split(' ')[0]).toString();
 
+    const currentDay = new XDate().toString('yyyyMM');
+    const diffToday =
+      Number(currentDay) - Number(this.props.month.toString('yyyyMM'));
+
     return (
       <View
         style={this.props.style}
@@ -146,37 +150,43 @@ class CalendarHeader extends Component {
         importantForAccessibility={this.props.importantForAccessibility} // Android
       >
         {/* [BONG APPEND] Header Style */}
-        <TouchableOpacity testID={`${testID}`}>
-          <View style={this.style.dayHeaderMondayContainer}>
-            <Text style={this.style.dayHeaderNowMonth}>{monthOnly}</Text>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                this.props.onRessChangeInitDate &&
-                  this.props.onRessChangeInitDate('reset');
-              }}>
-              <View style={this.style.dayHeaderNowYearContainer}>
-                <Text style={this.style.dayHeaderArrow}>월 · {yearOnly}</Text>
-                <View style={this.style.dayHeaderArrowIcon}>
-                  <Image
-                    style={{}}
-                    source={require('../img/IC_Open_S_N.png')}
-                  />
-                </View>
+        {/* <TouchableOpacity testID={`${testID}`}> */}
+        <View style={this.style.dayHeaderMondayContainer}>
+          <Text style={this.style.dayHeaderNowMonth}>{monthOnly}</Text>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              this.props.onRessChangeInitDate &&
+                this.props.onRessChangeInitDate('reset');
+            }}>
+            <View style={this.style.dayHeaderNowYearContainer}>
+              <Text style={this.style.dayHeaderArrow}>월 · {yearOnly}</Text>
+              <View style={this.style.dayHeaderArrowIcon}>
+                <Image style={{}} source={require('../img/IC_Open_S_N.png')} />
               </View>
-            </TouchableWithoutFeedback>
+            </View>
+          </TouchableWithoutFeedback>
+          {diffToday != 0 && (
             <TouchableWithoutFeedback
               onPress={() => {
                 //this.props.scrollToMonth(XDate());
                 this.props.onRessChangeInitDate &&
                   this.props.onRessChangeInitDate('today');
               }}>
-              <View style={this.style.todayBtnContainer}>
-                <Image source={require('../../img/icPrevSF.png')} />
-                <Text style={this.style.todayBtnIcon}>오늘</Text>
-              </View>
+              {diffToday > 0 ? (
+                <View style={this.style.todayBtn1Container}>
+                  <Text style={this.style.todayBtnIcon}>오늘</Text>
+                  <Image source={require('../../img/icGoSF.png')} />
+                </View>
+              ) : (
+                <View style={this.style.todayBtn2Container}>
+                  <Image source={require('../../img/icPrevSF.png')} />
+                  <Text style={this.style.todayBtnIcon}>오늘</Text>
+                </View>
+              )}
             </TouchableWithoutFeedback>
-          </View>
-        </TouchableOpacity>
+          )}
+        </View>
+        {/* </TouchableOpacity> */}
 
         {!this.props.hideDayNames && (
           <View style={this.style.week}>
