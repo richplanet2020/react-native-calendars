@@ -3,7 +3,12 @@ import {StyleSheet, Image} from 'react-native';
 
 const styles = StyleSheet.create({
   // icon style
-  iconStyle: {height: 12, width: 12},
+  iconStyle: {
+    height: 12,
+    width: 12,
+    marginRight: 0.5, // append bong.choi, 2020.8.3
+    marginLeft: 0.5, // append  bong.choi, 2020.8.3
+  },
   iconTextStyle: {
     height: 12,
     width: 12,
@@ -14,10 +19,21 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#000000',
     paddingLeft: 2,
+    marginRight: 0.5, // append bong.choi, 2020.8.3
+    marginLeft: 0.5, // append bong.choi, 2020.8.3
   },
-  iconContainer: {height: 12, width: 40, flexDirection: 'row'},
+  iconContainer: {
+    height: 12,
+    width: 40,
+    flexDirection: 'row',
+    justifyContent: 'center', // append bong.choi, 2020.8.3
+  },
   // text style
-  textContainer: {height: 13, width: 40},
+  textContainer: {
+    height: 13,
+    width: 40,
+    marginTop: -2, // append bong.choi, 2020.8.3
+  },
   textStyle: {fontSize: 8, textAlign: 'center'},
   selectedStyle: {
     width: 24,

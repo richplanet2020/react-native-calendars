@@ -184,7 +184,10 @@ class Day extends Component {
       containerStyle.push(this.style.today);
       // [APPEND BONG] 선택한 날짜인경우
       dayTextContainer.push({backgroundColor: '#ff7200'});
-    } else if (this.props.state === 'today') {
+    }
+
+    // 마킹과 오늘이 겹치면 오늘색상 표시
+    if (this.props.state === 'today') {
       containerStyle.push(this.style.today);
       textStyle.push(this.style.todayText);
       dayTextContainer.push({backgroundColor: '#403a61'});

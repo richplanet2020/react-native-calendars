@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import styleConstructor from './style';
 import {weekDayNames} from '../../dateutils';
 import {CHANGE_MONTH_LEFT_ARROW, CHANGE_MONTH_RIGHT_ARROW} from '../../testIDs';
-import {diff} from 'semver';
 
 class CalendarHeader extends Component {
   static displayName = 'IGNORE';

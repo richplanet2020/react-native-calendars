@@ -72,7 +72,7 @@ export default class CalendarxScreen extends Component {
       '2020-04-22': {
         color: 'lightgreen',
         dayEvent: {
-          icons: ['I35', 'I34', 'I33', 'I35', 'I36'],
+          icons: ['I35'],
         },
       },
       '2020-04-23': {color: 'lightgreen'},
@@ -107,6 +107,7 @@ export default class CalendarxScreen extends Component {
         //textColor: 'gray',
         dayEvent: {
           name: '진료',
+          icons: ['tem', 'vac'],
         },
       },
       '2020-05-04': {
@@ -161,7 +162,7 @@ export default class CalendarxScreen extends Component {
           staticHeader // ADD BONG. 위에 정적 헤더를 덮는다.
           hideExtraDays={false} // ADD BONG. 이전 다음달 일은 회색 처리한다.
           onDayPress={(day) => {
-            //this.setState({selected: day.dateString});
+            this.setState({selected: day.dateString});
             //this.calendar.scrollToMonth(XDate('2020-09-10'));
           }} // ADD BONG. 날짜를 누른경우
           onDayLongPress={(day) => console.log(day)} // ADD BONG. 날짜를 길게 누른경우
