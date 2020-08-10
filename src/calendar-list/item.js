@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Dimensions} from 'react-native';
 import Calendar from '../calendar';
 import styleConstructor from './style';
 
@@ -64,12 +64,11 @@ class CalendarListItem extends Component {
           theme={this.props.theme}
           style={[
             {
-              height: this.props.calendarHeight - 3, // update bongki.choi -3추가 2020.08.10
-              width: this.props.calendarWidth,
-              marginTop: 3, // update bongki.choi -3추가 2020.08.10
+              height: this.props.calendarHeight, // 434+3
+              width: this.props.calendarWidth, // window.width
             },
-            this.style.calendar,
-            this.props.style,
+            this.style.calendar, // 좌/우 패팅 16pt
+            this.props.style, // borderBottomWidth: 1, borderBottomColor: lightgrey
           ]}
           current={row}
           hideArrows={this.props.hideArrows}

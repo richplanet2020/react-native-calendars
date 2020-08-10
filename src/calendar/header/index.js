@@ -136,34 +136,47 @@ class CalendarHeader extends Component {
     let monthOnly = new Number(month.split(' ')[1]).toString();
     let yearOnly = new Number(month.split(' ')[0]).toString();
 
-    //const currentDay = new XDate().toString('yyyyMM');
-    //const diffToday =
-    //Number(currentDay) - Number(this.props.month.toString('yyyyMM'));
-    //Selected Date: 선택날짜가 오늘이 아닌경우 오늘 버튼 추가코드
-    const currentDay = new XDate().toString('yyyyMMdd');
+    //오늘 버튼 추가코드 bongki.choi 2020.08.10
+    //이번달인경우는 markedDates의 selected 정보를 가지고 판단하고
+    //이번달이 아닌경우는 월 정보를 가지고 판단한다.
+
     let diffToday = 0;
-    if (this.props.markedDates) {
-      const {markedDates} = this.props;
-      let selectedDate = '';
-      for (const [key, value] of Object.entries(markedDates)) {
-        if (key != 'undefined' && value) {
-          for (const [_key, _value] of Object.entries(value)) {
-            if (key && _key == 'selected' && _value == true) {
-              selectedDate = key;
+    const currentMonth = new XDate().toString('yyyyMM');
+    const screenMonth = this.props.month.toString('yyyyMM');
+    const isThisMonth =
+      Number(currentMonth) - Number(screenMonth) == 0 ? true : false;
+
+    if (isThisMonth) {
+      let currentDay = new XDate().toString('yyyyMMdd');
+      if (this.props.markedDates) {
+        const {markedDates} = this.props;
+        let selectedDate = '';
+        for (const [key, value] of Object.entries(markedDates)) {
+          if (key != 'undefined' && value) {
+            for (const [_key, _value] of Object.entries(value)) {
+              if (key && _key == 'selected' && _value == true) {
+                selectedDate = key;
+              }
             }
           }
         }
+        if (selectedDate) {
+          diffToday =
+            Number(currentDay) -
+            Number(new XDate(selectedDate).toString('yyyyMMdd'));
+        }
       }
-      if (selectedDate) {
-        diffToday =
-          Number(currentDay) -
-          Number(new XDate(selectedDate).toString('yyyyMMdd'));
-      }
+    } else {
+      diffToday = Number(currentMonth) - Number(screenMonth);
     }
 
     return (
       <View
-        style={this.props.style}
+        style={[
+          this.props.style,
+          //BONG: 헤더 박스
+          //{borderColor: 'black', borderWidth: 0.5}
+        ]}
         accessible
         accessibilityRole={'adjustable'}
         accessibilityActions={[

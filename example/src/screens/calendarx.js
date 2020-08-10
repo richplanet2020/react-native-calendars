@@ -264,8 +264,8 @@ export default class CalendarxScreen extends Component {
                 marginLeft: 2,
               },
               dayHeaderArrowIcon: {
-                height: 32, // 20
-                width: 32, // 20
+                height: 32, // 32->36
+                width: 32, // 32->36
                 marginTop: -5,
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -293,14 +293,14 @@ export default class CalendarxScreen extends Component {
 
               todayBtn1Container: {
                 position: 'absolute',
-                top: 8,
+                top: 6, // 8 -> 6 2020.09.07
                 right: 1,
                 flexDirection: 'row',
                 alignItems: 'center',
                 paddingLeft: 16,
-                width: 66,
-                height: 29,
-                borderRadius: 14.5,
+                width: 67, // 66 -> 67 2020.09.07
+                height: 32, // 29 -> 32 2020.09.07
+                borderRadius: 16, // 14.5 -> 16 2020.09.07
                 elevation: 12,
                 backgroundColor: '#403a61',
                 shadowColor: 'rgba(0, 0, 0, 0.16)',
@@ -314,14 +314,14 @@ export default class CalendarxScreen extends Component {
 
               todayBtn2Container: {
                 position: 'absolute',
-                top: 8,
+                top: 6, // 8 -> 6 2020.09.07
                 right: 1,
                 flexDirection: 'row',
                 alignItems: 'center',
                 paddingLeft: 8,
-                width: 66,
-                height: 29,
-                borderRadius: 14.5,
+                width: 67, // 66 -> 67 2020.09.07
+                height: 32, // 29 -> 32 2020.09.07
+                borderRadius: 16, // 14.5 -> 16 2020.09.07
                 elevation: 12,
                 backgroundColor: '#403a61',
                 shadowColor: 'rgba(0, 0, 0, 0.16)',
@@ -354,15 +354,14 @@ export default class CalendarxScreen extends Component {
               },
             },
           }} // ADD BONG. 켈린더 테마를 오버라이딩 한다.
-          headerStyle={
-            {
-              // <달력 헤더 영역 정보>
-              // marginTop: 7,
-              //borderWidth: 1,
-              //borderColor: 'green',
-              //backgroundColor: 'pink',
-            }
-          }
+          headerStyle={{
+            // <달력 헤더 영역 정보>
+            // marginTop: 7,
+            //borderWidth: 1,
+            //borderColor: 'green',
+            //backgroundColor: 'pink',
+            marginBottom: 3.5, // append bongki.choi 2020.09.07
+          }}
         />
       </>
     );

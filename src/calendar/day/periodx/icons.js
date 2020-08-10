@@ -8,6 +8,10 @@ const styles = StyleSheet.create({
     width: 12,
     marginRight: 0.5, // append bong.choi, 2020.8.3
     marginLeft: 0.5, // append  bong.choi, 2020.8.3
+
+    //BONG:아이콘 박스
+    //borderColor: 'black',
+    //borderWidth: 0.5,
   },
   iconTextStyle: {
     height: 12,
@@ -33,8 +37,6 @@ const styles = StyleSheet.create({
   textContainer: {
     height: 13,
     width: 40,
-    marginTop: -1, // append bongki.choi, 2020.8.3
-    //backgroundColor: 'pink', // append bongki.choi 2020.8.3
   },
   textStyle: {
     fontSize: 8,

@@ -136,14 +136,28 @@ class Day extends Component {
         });
       }
     }
-    return <View style={styles.iconContainer}>{IconArrs}</View>;
+    return (
+      <View
+        style={[
+          styles.iconContainer,
+          //BONG:배지 영역 표시
+          //{backgroundColor: 'lightgreen'},
+        ]}>
+        {IconArrs}
+      </View>
+    );
   };
 
   // [APPEND BONG] TEXT 영역 표기하기
   createText = () => {
     if (this.props.marking.dayEvent) {
       return (
-        <View style={styles.textContainer}>
+        <View
+          style={[
+            styles.textContainer,
+            //BONG: 문구 색깔 표시
+            //{backgroundColor: 'lightblue', height: 13},
+          ]}>
           <Text style={styles.textStyle}>
             {this.props.marking.dayEvent.name}
           </Text>
@@ -250,19 +264,6 @@ class Day extends Component {
         });
       }
 
-      // console.log(
-      //   'filterStyle=' + JSON.stringify([this.style.fillers, fillerStyle]),
-      // );
-      // console.log(
-      //   'leftFillerStyle=' +
-      //     JSON.stringify([this.style.leftFiller, leftFillerStyle]),
-      // );
-      // console.log(
-      //   'rightFillerStyle=' +
-      //     JSON.stringify([this.style.rightFiller, rightFillerStyle]),
-      // );
-      // console.log('---');
-
       fillers = (
         <View style={[this.style.fillers, fillerStyle]}>
           <View style={[this.style.leftFiller, leftFillerStyle]} />
@@ -272,16 +273,38 @@ class Day extends Component {
     }
 
     // [APPEND BONG] 이전, 다음달 날짜이면 무조건 Disabled 색깔 표기
+    //  2020.08.10 내용 추가
     if (this.props.state === 'disabled') {
       textStyle.push({color: '#e6e6e6'});
     }
 
-    // append bongki.choi 2020.08.10
+    // append bongki.choi
     // height : 디자인변경으로 21->24변경
     // marginTop : period color가 자기영역에서 1.5(좌,우)보다 커지게 잡혀야 해서 위로 3pt 올림
+    // append bongki.choi 2020.09.07
     containerStyle.push([
-      {width: 40, height: 21, marginTop: 0, textAlign: 'center'},
-      {height: 24, marginTop: -3}, // append bongki.choi 2020.08.10
+      {
+        width: 40,
+        height: 24,
+        marginTop: -3,
+        textAlign: 'center',
+        justifyContent: 'center',
+        //BONG: 날짜 영역
+        //backgroundColor: 'green',
+        //borderRadius: 0,
+      },
+    ]);
+    // append bongki.choi
+    // append bongki.choi 2020.09.07
+    textStyle.push([
+      {
+        height: 24,
+        textAlign: 'center',
+        lineHeight: 22.5, // android: 22.5
+        letterSpacing: -0.7, // android: -0.7
+        //BONG: 날짜 텍스트
+        //backgroundColor: 'red',
+      },
     ]);
 
     return (
@@ -301,14 +324,21 @@ class Day extends Component {
             {
               height: 48,
               borderBottomColor: 'white',
-              //borderWidth: 1,
-              //backgroundColor: 'red',
+              //날짜 영역
+              //borderWidth: 0.5,
+              //borderColor: 'red',
             },
           ]}>
           {fillers}
+          {/* 달력 날짜 */}
           <View style={containerStyle}>
-            <View style={[dayTextContainer]}>
-              <Text allowFontScaling={false} style={textStyle}>
+            <View
+              style={[
+                dayTextContainer,
+                // BONG: 선택영역 원형 컬러
+                //{backgroundColor: 'yellow', borderRadius: 0},
+              ]}>
+              <Text allowFontScaling={false} style={[textStyle]}>
                 {String(this.props.children)}
               </Text>
             </View>

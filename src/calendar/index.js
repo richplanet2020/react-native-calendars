@@ -217,7 +217,10 @@ class Calendar extends Component {
           height: 48, // APPEND BONG.
           width: 40, // APPEND BONG.
           marginBottom: 8, // APPEND BONG.
-          //backgroundColor: 'green',
+
+          //BONG: 날짜 박스
+          //borderColor: 'black',
+          //borderWidth: 0.2,
         }}
         key={id}>
         <DayComp
@@ -352,8 +355,9 @@ class Calendar extends Component {
       }
     }
 
-    //console.log('headerStyle->' + JSON.stringify(this.props.headerStyle));
-
+    // this.style.container => {"paddingLeft":5,"paddingRight":5,"backgroundColor":"white"}
+    // this.props.style => [{"height":437,"width":411.42857142857144},{"paddingLeft":16,"paddingRight":16},null]
+    // this.props.headerStyle => {"backgroundColor":"pink","marginBottom":3}
     return (
       <View
         style={[this.style.container, this.props.style]}
