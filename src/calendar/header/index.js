@@ -88,6 +88,10 @@ class CalendarHeader extends Component {
     if (nextProps.disableArrowRight !== this.props.disableArrowRight) {
       return true;
     }
+    // append bongki.choi 2020.08.10
+    if (nextProps.markedDates !== this.props.markedDates) {
+      return true;
+    }
     return false;
   }
 
