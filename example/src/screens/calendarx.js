@@ -102,7 +102,7 @@ export default class CalendarxScreen extends Component {
         dayEvent: {name: '생리종료'},
       },
       '2020-04-10': {
-        selected: true,
+        //selected: true,
         //color: 'green',
         //textColor: 'gray',
         dayEvent: {
@@ -110,18 +110,50 @@ export default class CalendarxScreen extends Component {
           icons: ['tem', 'vac'],
         },
       },
-      '2020-05-04': {
+      '2020-05-01': {
         disabled: true,
         startingDay: true,
+        // endingDay: true,
+        color: 'green',
+        //selected: true,
+        //selected: true,
+      },
+      '2020-05-02': {
+        disabled: true,
+        //startingDay: true,
+        // endingDay: true,
+        color: 'green',
+        //selected: true,
+        //selected: true,
+      },
+      '2020-05-03': {
+        disabled: true,
+        //startingDay: true,
+        // endingDay: true,
+        color: 'green',
+        //selected: true,
+        //selected: true,
+      },
+      '2020-05-04': {
+        disabled: true,
+        //startingDay: true,
+        // endingDay: true,
+        color: 'green',
+        //selected: true,
+        //selected: true,
+      },
+      '2020-05-05': {
+        disabled: true,
         endingDay: true,
         color: 'green',
+        //selected: true,
         //selected: true,
       },
       '2020-05-31': {
         //selected: true,
         //color: 'green',
         //textColor: 'gray',
-        selected: true,
+        //selected: true,
         dayEvent: {
           name: '배란예정일',
           //icons: ['drug', 'trt', 'tem'],
@@ -130,6 +162,10 @@ export default class CalendarxScreen extends Component {
       },
       '2020-06-05': {
         today: true,
+      },
+
+      '2020-08-10': {
+        selected: true,
       },
     };
 
@@ -151,7 +187,7 @@ export default class CalendarxScreen extends Component {
           current={'2020-05-01'}
           pastScrollRange={24}
           futureScrollRange={24}
-          calendarHeight={434}
+          calendarHeight={434 + 3}
           //onViewableItemsChanged={this.onViewableItemsChanged}
           horizontal
           pagingEnabled
@@ -191,12 +227,12 @@ export default class CalendarxScreen extends Component {
           theme={{
             arrowColor: 'white',
             'stylesheet.calendar.header': {
-              // APPEND BONG - [S] -
+              // APPEND BONG - [stylesheet.calendar.header.S] -
+              // <달력 헤더 정보>
               dayHeaderMondayContainer: {
                 flexDirection: 'row',
-                marginLeft: 20,
+                marginLeft: 5,
                 marginTop: 12,
-                //backgroundColor: 'green',
               },
               dayHeaderNowMonth: {
                 maxWidth: 33, // 16.5 두자릿수 대응을 위해 x2배함.
@@ -209,16 +245,13 @@ export default class CalendarxScreen extends Component {
                 letterSpacing: -1.4,
                 textAlign: 'left',
                 color: '#000000',
-                //backgroundColor: 'orange',
               },
               dayHeaderNowYearContainer: {
                 paddingTop: 14,
                 height: 41.5,
                 flexDirection: 'row',
-                //backgroundColor: 'red',
               },
               dayHeaderArrow: {
-                //width: 58,
                 height: 22.5,
                 fontFamily: 'NotoSansCJKkr-Medium',
                 fontSize: 15,
@@ -229,14 +262,13 @@ export default class CalendarxScreen extends Component {
                 textAlign: 'left',
                 color: '#a0a0a0',
                 marginLeft: 2,
-                //backgroundColor:'green',
               },
               dayHeaderArrowIcon: {
-                height: 20,
-                width: 20,
+                height: 32, // 20
+                width: 32, // 20
+                marginTop: -5,
                 alignItems: 'center',
                 justifyContent: 'center',
-                //backgroundColor: 'blue',
               },
               week: {
                 marginTop: 10,
@@ -244,8 +276,8 @@ export default class CalendarxScreen extends Component {
                 height: 14.5,
                 flexDirection: 'row',
                 justifyContent: 'space-around',
-                //backgroundColor: 'yellow',
               },
+
               dayHeader: {
                 width: 40,
                 height: 14.5,
@@ -257,41 +289,78 @@ export default class CalendarxScreen extends Component {
                 letterSpacing: -0.5,
                 textAlign: 'center',
                 color: '#a0a0a0',
-                //backgroundColor: 'pink',
               },
-              //APPEND BONG - [E] -
+
+              todayBtn1Container: {
+                position: 'absolute',
+                top: 8,
+                right: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingLeft: 16,
+                width: 66,
+                height: 29,
+                borderRadius: 14.5,
+                elevation: 12,
+                backgroundColor: '#403a61',
+                shadowColor: 'rgba(0, 0, 0, 0.16)',
+                shadowOffset: {
+                  width: 0,
+                  height: 6,
+                },
+                shadowRadius: 5,
+                shadowOpacity: 1,
+              },
+
+              todayBtn2Container: {
+                position: 'absolute',
+                top: 8,
+                right: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingLeft: 8,
+                width: 66,
+                height: 29,
+                borderRadius: 14.5,
+                elevation: 12,
+                backgroundColor: '#403a61',
+                shadowColor: 'rgba(0, 0, 0, 0.16)',
+                shadowOffset: {
+                  width: 0,
+                  height: 6,
+                },
+                shadowRadius: 5,
+                shadowOpacity: 1,
+              },
+              //APPEND BONG - [stylesheet.calendar.header.E] -
             },
             'stylesheet.day.period': {
-              //APPEND BONG - [S] -
+              // <달력 날짜 정보>
+              //APPEND BONG - [stylesheet.day.period.S] -
               wrapper: {
                 alignItems: 'center',
                 alignSelf: 'stretch',
                 marginLeft: -1,
-                height: 21,
               },
               text: {
-                //marginTop: 7,
-                //fontSize: appStyle.textDayFontSize,
-                //fontFamily: appStyle.textDayFontFamily,
-                //fontWeight: appStyle.textDayFontWeight,
-                //color: appStyle.dayTextColor,
                 backgroundColor: 'rgba(255, 255, 255, 0)',
               },
-              //APPEND BONG - [E] -
+              //APPEND BONG - [stylesheet.day.period.E] -
             },
             'stylesheet.calendar.main': {
               week: {
-                //marginTop: 7,
-                //marginBottom: 7,
                 flexDirection: 'row',
                 justifyContent: 'space-around',
-                //backgroundColor: 'blue',
               },
             },
           }} // ADD BONG. 켈린더 테마를 오버라이딩 한다.
           headerStyle={
             {
-              // backgroundColor: 'pink',
+              // <달력 헤더 영역 정보>
+              // marginTop: 7,
+              //borderWidth: 1,
+              //borderColor: 'green',
+              //backgroundColor: 'pink',
             }
           }
         />

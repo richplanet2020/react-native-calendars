@@ -171,7 +171,7 @@ class Day extends Component {
     // [APPEND BONG.] 휴일 색깔 표시, 현재 달만 색깔이 들어감
     if (
       this.props.state != 'disabled' &&
-      (this.props.id === 0 || this.props.id === 6)
+      this.props.id === 0 /*|| this.props.id === 6*/
     ) {
       textStyle.push({color: 'red'});
     }
@@ -192,8 +192,6 @@ class Day extends Component {
       textStyle.push(this.style.todayText);
       dayTextContainer.push({backgroundColor: '#403a61'});
     }
-
-    //console.log(JSON.stringify(this.props.marking));
 
     if (this.props.marking) {
       containerStyle.push({
@@ -273,7 +271,18 @@ class Day extends Component {
       );
     }
 
-    containerStyle.push([{width: 40, height: 24, textAlign: 'center'}]);
+    // [APPEND BONG] 이전, 다음달 날짜이면 무조건 Disabled 색깔 표기
+    if (this.props.state === 'disabled') {
+      textStyle.push({color: '#e6e6e6'});
+    }
+
+    // append bongki.choi 2020.08.10
+    // height : 디자인변경으로 21->24변경
+    // marginTop : period color가 자기영역에서 1.5(좌,우)보다 커지게 잡혀야 해서 위로 3pt 올림
+    containerStyle.push([
+      {width: 40, height: 21, marginTop: 0, textAlign: 'center'},
+      {height: 24, marginTop: -3}, // append bongki.choi 2020.08.10
+    ]);
 
     return (
       <TouchableWithoutFeedback
@@ -286,10 +295,19 @@ class Day extends Component {
           this.props.marking.disableTouchEvent ? undefined : 'button'
         }
         accessibilityLabel={this.props.accessibilityLabel}>
-        <View style={this.style.wrapper}>
+        <View
+          style={[
+            this.style.wrapper,
+            {
+              height: 48,
+              borderBottomColor: 'white',
+              //borderWidth: 1,
+              //backgroundColor: 'red',
+            },
+          ]}>
           {fillers}
           <View style={containerStyle}>
-            <View style={dayTextContainer}>
+            <View style={[dayTextContainer]}>
               <Text allowFontScaling={false} style={textStyle}>
                 {String(this.props.children)}
               </Text>

@@ -3,13 +3,12 @@ import {Text, View} from 'react-native';
 import Calendar from '../calendar';
 import styleConstructor from './style';
 
-
 class CalendarListItem extends Component {
   static displayName = 'IGNORE';
-  
+
   static defaultProps = {
     hideArrows: true,
-    hideExtraDays: true
+    hideExtraDays: true,
   };
 
   constructor(props) {
@@ -21,7 +20,10 @@ class CalendarListItem extends Component {
   shouldComponentUpdate(nextProps) {
     const r1 = this.props.item;
     const r2 = nextProps.item;
-    return r1.toString('yyyy MM') !== r2.toString('yyyy MM') || !!(r2.propbump && r2.propbump !== r1.propbump);
+    return (
+      r1.toString('yyyy MM') !== r2.toString('yyyy MM') ||
+      !!(r2.propbump && r2.propbump !== r1.propbump)
+    );
   }
 
   onPressArrowLeft = (_, month) => {
@@ -40,7 +42,7 @@ class CalendarListItem extends Component {
 
       this.props.scrollToMonth(monthClone);
     }
-  }
+  };
 
   onPressArrowRight = (_, month) => {
     const monthClone = month.clone();
@@ -51,16 +53,24 @@ class CalendarListItem extends Component {
       monthClone.addMonths(1);
       this.props.scrollToMonth(monthClone);
     }
-  }
+  };
 
   render() {
     const row = this.props.item;
-
+    // 헤더와 캘린더 영역에 3pt 공백을 추가하기 위해 -3, +3 마진을 적용한다.
     if (row.getTime) {
       return (
         <Calendar
           theme={this.props.theme}
-          style={[{height: this.props.calendarHeight, width: this.props.calendarWidth}, this.style.calendar, this.props.style]}
+          style={[
+            {
+              height: this.props.calendarHeight - 3, // update bongki.choi -3추가 2020.08.10
+              width: this.props.calendarWidth,
+              marginTop: 3, // update bongki.choi -3추가 2020.08.10
+            },
+            this.style.calendar,
+            this.props.style,
+          ]}
           current={row}
           hideArrows={this.props.hideArrows}
           hideExtraDays={this.props.hideExtraDays}
@@ -79,9 +89,19 @@ class CalendarListItem extends Component {
           disabledByDefault={this.props.disabledByDefault}
           showWeekNumbers={this.props.showWeekNumbers}
           renderArrow={this.props.renderArrow}
-          onPressArrowLeft={this.props.horizontal ? this.onPressArrowLeft : this.props.onPressArrowLeft}
-          onPressArrowRight={this.props.horizontal ? this.onPressArrowRight : this.props.onPressArrowRight}
-          headerStyle={this.props.horizontal ? this.props.headerStyle : undefined}
+          onPressArrowLeft={
+            this.props.horizontal
+              ? this.onPressArrowLeft
+              : this.props.onPressArrowLeft
+          }
+          onPressArrowRight={
+            this.props.horizontal
+              ? this.onPressArrowRight
+              : this.props.onPressArrowRight
+          }
+          headerStyle={
+            this.props.horizontal ? this.props.headerStyle : undefined
+          }
           accessibilityElementsHidden={this.props.accessibilityElementsHidden} // iOS
           importantForAccessibility={this.props.importantForAccessibility} // Android
         />
@@ -90,8 +110,17 @@ class CalendarListItem extends Component {
       const text = row.toString();
 
       return (
-        <View style={[{height: this.props.calendarHeight, width: this.props.calendarWidth}, this.style.placeholder]}>
-          <Text allowFontScaling={false} style={this.style.placeholderText}>{text}</Text>
+        <View
+          style={[
+            {
+              height: this.props.calendarHeight,
+              width: this.props.calendarWidth,
+            },
+            this.style.placeholder,
+          ]}>
+          <Text allowFontScaling={false} style={this.style.placeholderText}>
+            {text}
+          </Text>
         </View>
       );
     }

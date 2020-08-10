@@ -27,14 +27,20 @@ const styles = StyleSheet.create({
     width: 40,
     flexDirection: 'row',
     justifyContent: 'center', // append bong.choi, 2020.8.3
+    //backgroundColor: 'blue', // append bongki.choi, 2020.8.10
   },
-  // text style
+  // 캘린더 날짜문구 영역 스타일 [s]
   textContainer: {
     height: 13,
     width: 40,
-    marginTop: -2, // append bong.choi, 2020.8.3
+    marginTop: -1, // append bongki.choi, 2020.8.3
+    //backgroundColor: 'pink', // append bongki.choi 2020.8.3
   },
-  textStyle: {fontSize: 8, textAlign: 'center'},
+  textStyle: {
+    fontSize: 8,
+    textAlign: 'center',
+  },
+  // 캘린더 날짜문구 영역 스타일 [e]
   selectedStyle: {
     width: 24,
     height: 24,

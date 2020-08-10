@@ -32,6 +32,7 @@ class CalendarHeader extends Component {
     scrollToMonth: PropTypes.func,
     markingType: PropTypes.string, // [APPEND BONG.]
     onRessChangeInitDate: PropTypes.func, // [APPEND BONG.]
+    markedDates: PropTypes.object, // [APPEND BONG.]
   };
 
   static defaultProps = {
@@ -131,9 +132,30 @@ class CalendarHeader extends Component {
     let monthOnly = new Number(month.split(' ')[1]).toString();
     let yearOnly = new Number(month.split(' ')[0]).toString();
 
-    const currentDay = new XDate().toString('yyyyMM');
-    const diffToday =
-      Number(currentDay) - Number(this.props.month.toString('yyyyMM'));
+    //const currentDay = new XDate().toString('yyyyMM');
+    //const diffToday =
+    //Number(currentDay) - Number(this.props.month.toString('yyyyMM'));
+    //Selected Date: 선택날짜가 오늘이 아닌경우 오늘 버튼 추가코드
+    const currentDay = new XDate().toString('yyyyMMdd');
+    let diffToday = 0;
+    if (this.props.markedDates) {
+      const {markedDates} = this.props;
+      let selectedDate = '';
+      for (const [key, value] of Object.entries(markedDates)) {
+        if (key != 'undefined' && value) {
+          for (const [_key, _value] of Object.entries(value)) {
+            if (key && _key == 'selected' && _value == true) {
+              selectedDate = key;
+            }
+          }
+        }
+      }
+      if (selectedDate) {
+        diffToday =
+          Number(currentDay) -
+          Number(new XDate(selectedDate).toString('yyyyMMdd'));
+      }
+    }
 
     return (
       <View
@@ -187,6 +209,8 @@ class CalendarHeader extends Component {
         </View>
         {/* </TouchableOpacity> */}
 
+        {/* 요일 색깔 변경 bongki.choi  
+        idx === 0 || idx === 6 ? {color: '#f08b76'} : {}, */}
         {!this.props.hideDayNames && (
           <View style={this.style.week}>
             {this.props.weekNumbers && (
@@ -198,7 +222,7 @@ class CalendarHeader extends Component {
                 key={idx}
                 style={[
                   {...this.style.dayHeader},
-                  idx === 0 || idx === 6 ? {color: '#f08b76'} : {},
+                  idx === 0 ? {color: '#f08b76'} : {},
                 ]}
                 numberOfLines={1}
                 accessibilityLabel={''}

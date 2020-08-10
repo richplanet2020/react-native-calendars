@@ -321,7 +321,7 @@ class CalendarList extends Component {
   }
 
   renderStaticHeader() {
-    const {staticHeader, horizontal} = this.props;
+    const {staticHeader, horizontal, markedDates} = this.props;
     const useStaticHeader = staticHeader && horizontal;
 
     if (useStaticHeader) {
@@ -355,6 +355,7 @@ class CalendarList extends Component {
           scrollToMonth={this.scrollToMonth.bind(this)} // [APPEND BONG]
           markingType={this.props.markingType} // [APPEND BONG]
           onRessChangeInitDate={this.props.onRessChangeInitDate} // [APPEND BONG]
+          markedDates={markedDates} // [APPEND BONG]
         />
       );
     }

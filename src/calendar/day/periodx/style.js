@@ -23,6 +23,7 @@ export default function styleConstructor(theme = {}) {
       flexDirection: 'row',
       left: 0,
       right: 0,
+      top: -3, // append bongki.choi 2020.08.10
     },
     leftFiller: {
       height: FILLER_HEIGHT,
