@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   textContainer: {
     height: 13,
     width: 40,
+    justifyContent: 'center',
   },
   textStyle: {
     fontSize: 8,
