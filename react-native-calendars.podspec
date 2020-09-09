@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = package['homepage']
   s.platform     = :ios, "9.0"
 
-  s.source       = { :git => "https://github.com/richplanet2020/react-native-calendars.git#style_edits_200416", :tag => "v#{s.version}" }
+  s.source       = { :git => "https://github.com/richplanet2020/react-native-calendars.git", :tag => "v#{s.version}" }
 
   s.dependency 'React'
 end
