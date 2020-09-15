@@ -91,8 +91,16 @@ export default function (theme = {}) {
     },
     todayBtnIcon: {
       color: 'white',
-      fontWeight: 'bold',
-      fontSize: 11,
+      //fontWeight: 'bold',
+      //fontSize: 11,
+      fontSize: 12, // BONG, 2020.09.15 추가 (11->12 수정)
+      fontFamily: appStyle.textDayHeaderFontFamily, // BONG, 2020.09.15 추가
+      fontWeight: '500', // BONG, 2020.09.15 추가
+      fontStyle: 'normal', // BONG, 2020.09.15 추가
+      lineHeight: 18, // BONG, 2020.09.15 추가
+      letterSpacing: -0.6, // BONG, 2020.09.15 추가
+      textAlign: 'center', // BONG, 2020.09.15 추가
+      marginBottom: 1, // BONG, 2020.09.15 추가(디자인 요청으로 위로 1px올림)
     },
     ...(theme[STYLESHEET_ID] || {}),
   });

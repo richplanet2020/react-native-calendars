@@ -1,6 +1,9 @@
 import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 
+import * as defaultStyle from '../../../style'; // BONG,2020.09.15 추가
+const appStyle = {...defaultStyle}; // BONG,2020.09.15 추가
+
 const styles = StyleSheet.create({
   // icon style
   iconStyle: {
@@ -17,6 +20,7 @@ const styles = StyleSheet.create({
     height: 12,
     width: 12,
     fontSize: 8,
+    fontFamily: appStyle.textDayFontFamily, // BONG,2020.09.15 추가
     fontWeight: 'normal',
     lineHeight: 12,
     letterSpacing: -0.4,
