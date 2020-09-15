@@ -6,6 +6,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {CalendarList, LocaleConfig} from 'react-native-calendars';
 import XDate from 'xdate';
@@ -235,11 +236,11 @@ export default class CalendarxScreen extends Component {
                 marginTop: 12,
               },
               dayHeaderNowMonth: {
-                maxWidth: 33, // 16.5 두자릿수 대응을 위해 x2배함.
+                maxWidth: 34, // 16.5 두자릿수 대응을 위해 x2배함.
                 height: 41.5,
                 fontFamily: 'NotoSansCJKkr-Medium',
                 fontSize: 28,
-                fontWeight: 'bold',
+                fontWeight: Platform.OS == 'android' ? '500' : 'bold', // BONG, 2020.09.15
                 fontStyle: 'normal',
                 lineHeight: 41.5,
                 letterSpacing: -1.4,

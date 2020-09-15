@@ -8,6 +8,28 @@ import * as defaultStyle from '../../../style';
 import styleConstructor from './style';
 import {styles, iconList as ICON_LIST} from './icons';
 
+// BONG, 2020.09.15
+const fontStyle8 = {
+  fontFamily: 'NotoSansCJKkr-Regular',
+  fontSize: 8,
+  fontWeight: 'normal',
+  fontStyle: 'normal',
+  lineHeight: 12,
+  letterSpacing: -0.4,
+  textAlign: 'center',
+};
+
+// BONG, 2020.09.15
+const fontStyle14 = {
+  fontFamily: 'NotoSansCJKkr-Regular',
+  fontSize: 14,
+  fontWeight: 'normal',
+  fontStyle: 'normal',
+  lineHeight: 20.5,
+  letterSpacing: -0.7,
+  textAlign: 'center',
+};
+
 class Day extends Component {
   static displayName = 'IGNORE';
 
@@ -26,7 +48,6 @@ class Day extends Component {
 
   constructor(props) {
     super(props);
-
     this.theme = {...defaultStyle, ...(props.theme || {})};
     this.style = styleConstructor(props.theme);
 
@@ -128,7 +149,7 @@ class Day extends Component {
           } else if (IconArrsProps.length > 3) {
             IconArrs.pop();
             IconArrs.push(
-              <Text style={styles.iconTextStyle}>
+              <Text style={[styles.iconTextStyle, fontStyle8]}>
                 +{IconArrsProps.length - 2}
               </Text>,
             );
@@ -158,7 +179,7 @@ class Day extends Component {
             //BONG: 문구 색깔 표시
             //{backgroundColor: 'lightblue', height: 13},
           ]}>
-          <Text style={styles.textStyle}>
+          <Text style={[styles.textStyle, fontStyle8]}>
             {this.props.marking.dayEvent.name}
           </Text>
         </View>
@@ -338,7 +359,7 @@ class Day extends Component {
                 // BONG: 선택영역 원형 컬러
                 //{backgroundColor: 'yellow', borderRadius: 0},
               ]}>
-              <Text allowFontScaling={false} style={[textStyle]}>
+              <Text allowFontScaling={false} style={[textStyle, fontStyle14]}>
                 {String(this.props.children)}
               </Text>
             </View>
