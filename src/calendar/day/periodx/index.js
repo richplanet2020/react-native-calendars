@@ -25,9 +25,9 @@ const fontStyle14 = {
   fontSize: 14,
   fontWeight: 'normal',
   fontStyle: 'normal',
-  lineHeight: 20.5,
-  letterSpacing: -0.7,
-  textAlign: 'center',
+  //lineHeight: 20.5,
+  //letterSpacing: -0.7,
+  //textAlign: 'center',
 };
 
 class Day extends Component {
