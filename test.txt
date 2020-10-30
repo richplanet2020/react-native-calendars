@@ -1,1 +1,3 @@
 Commit 10/30(금)
+ - Detox 이슈 발생하면 디펜던디 및 detox configuration부분을 제거해서 확인한다. 
+ - Detox 는 테스트오토메이션을 하기위한 툴로 확인된다.
