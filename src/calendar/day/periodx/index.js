@@ -16,7 +16,7 @@ const fontStyle8 = {
   fontStyle: 'normal',
   lineHeight: 12,
   letterSpacing: -0.4,
-  textAlign: 'center',
+  textAlign: 'center'
 };
 
 // BONG, 2020.09.15
@@ -24,7 +24,7 @@ const fontStyle14 = {
   fontFamily: 'NotoSansCJKkr-Regular',
   fontSize: 14,
   fontWeight: 'normal',
-  fontStyle: 'normal',
+  fontStyle: 'normal'
   //lineHeight: 20.5,
   //letterSpacing: -0.7,
   //textAlign: 'center',
@@ -43,7 +43,7 @@ class Day extends Component {
     onLongPress: PropTypes.func,
     date: PropTypes.object,
     id: PropTypes.number, // APPEND BONG
-    markingExists: PropTypes.bool,
+    markingExists: PropTypes.bool
   };
 
   constructor(props) {
@@ -76,7 +76,7 @@ class Day extends Component {
       'state',
       'children',
       'onPress',
-      'onLongPress',
+      'onLongPress'
     ]);
   }
 
@@ -116,17 +116,17 @@ class Day extends Component {
       }
       if (next.startingDay) {
         prev.startingDay = {
-          color,
+          color
         };
       }
       if (next.endingDay) {
         prev.endingDay = {
-          color,
+          color
         };
       }
       if (!next.startingDay && !next.endingDay) {
         prev.day = {
-          color,
+          color
         };
       }
       if (next.textColor) {
@@ -138,14 +138,18 @@ class Day extends Component {
   }
 
   // [APPEND BONG] BADGE 영역 표기하기
-  crateBage = () => {
+  crateBage = (isDisabled) => {
     let IconArrs = [];
+    // 이전달 이후 달의 날짜 데이터의 경우는 색깔 변경한다.
+    const opacity = isDisabled ? 0.2 : 1;
     if (this.props.marking.dayEvent) {
       let IconArrsProps = this.props.marking.dayEvent.icons;
       if (IconArrsProps && IconArrsProps.length > 0) {
-        _(IconArrsProps).each(function (item, idx) {
+        // each => forEach 변경 each에서 나열이 안되는 현상 있음!!    
+        _(IconArrsProps).forEach(function (item, idx) {
+          const IconImage = ICON_LIST[item];
           if (IconArrs.length < 3) {
-            ICON_LIST[item] && IconArrs.push(ICON_LIST[item]);
+            IconImage && IconArrs.push(IconImage);
           } else if (IconArrsProps.length > 3) {
             IconArrs.pop();
             IconArrs.push(
@@ -157,12 +161,14 @@ class Day extends Component {
         });
       }
     }
+
     return (
       <View
         style={[
-          styles.iconContainer,
+          styles.iconContainer
           //BONG:배지 영역 표시
-          //{backgroundColor: 'lightgreen'},
+          //,{backgroundColor: 'lightgreen'}
+          , {opacity: opacity}
         ]}>
         {IconArrs}
       </View>
@@ -170,22 +176,24 @@ class Day extends Component {
   };
 
   // [APPEND BONG] TEXT 영역 표기하기
-  createText = () => {
+  createText = (isDisabled) => {
+    // 이전달 이후 달의 날짜 데이터의 경우는 색깔 변경한다.
+    const textColor = isDisabled ? '#e6e6e6' : '#000000';
     if (this.props.marking.dayEvent) {
       return (
         <View
           style={[
-            styles.textContainer,
+            styles.textContainer
             //BONG: 문구 색깔 표시
             //{backgroundColor: 'lightblue', height: 13},
           ]}>
-          <Text style={[styles.textStyle, fontStyle8]}>
+          <Text style={[styles.textStyle, fontStyle8, {color:textColor}]}>
             {this.props.marking.dayEvent.name}
           </Text>
         </View>
       );
     }
-    return <View style={styles.textContainer} />;
+    return <View style={styles.textContainer}/>;
   };
 
   render() {
@@ -230,7 +238,7 @@ class Day extends Component {
 
     if (this.props.marking) {
       containerStyle.push({
-        borderRadius: 17,
+        borderRadius: 17
       });
 
       const flags = this.markingStyle;
@@ -250,23 +258,23 @@ class Day extends Component {
 
       if (flags.startingDay && !flags.endingDay) {
         leftFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
+          backgroundColor: this.theme.calendarBackground
         };
         rightFillerStyle = {
-          backgroundColor: flags.startingDay.color,
+          backgroundColor: flags.startingDay.color
         };
         containerStyle.push({
-          backgroundColor: flags.startingDay.color,
+          backgroundColor: flags.startingDay.color
         });
       } else if (flags.endingDay && !flags.startingDay) {
         rightFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
+          backgroundColor: this.theme.calendarBackground
         };
         leftFillerStyle = {
-          backgroundColor: flags.endingDay.color,
+          backgroundColor: flags.endingDay.color
         };
         containerStyle.push({
-          backgroundColor: flags.endingDay.color,
+          backgroundColor: flags.endingDay.color
         });
       } else if (flags.day) {
         leftFillerStyle = {backgroundColor: flags.day.color};
@@ -275,20 +283,20 @@ class Day extends Component {
         fillerStyle = {backgroundColor: flags.day.color};
       } else if (flags.endingDay && flags.startingDay) {
         rightFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
+          backgroundColor: this.theme.calendarBackground
         };
         leftFillerStyle = {
-          backgroundColor: this.theme.calendarBackground,
+          backgroundColor: this.theme.calendarBackground
         };
         containerStyle.push({
-          backgroundColor: flags.endingDay.color,
+          backgroundColor: flags.endingDay.color
         });
       }
 
       fillers = (
         <View style={[this.style.fillers, fillerStyle]}>
-          <View style={[this.style.leftFiller, leftFillerStyle]} />
-          <View style={[this.style.rightFiller, rightFillerStyle]} />
+          <View style={[this.style.leftFiller, leftFillerStyle]}/>
+          <View style={[this.style.rightFiller, rightFillerStyle]}/>
         </View>
       );
     }
@@ -309,11 +317,11 @@ class Day extends Component {
         height: 24,
         marginTop: -3,
         textAlign: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
         //BONG: 날짜 영역
         //backgroundColor: 'green',
         //borderRadius: 0,
-      },
+      }
     ]);
     // append bongki.choi
     // append bongki.choi 2020.09.07
@@ -322,10 +330,10 @@ class Day extends Component {
         height: 24,
         textAlign: 'center',
         lineHeight: 22.5, // android: 22.5
-        letterSpacing: -0.7, // android: -0.7
+        letterSpacing: -0.7 // android: -0.7
         //BONG: 날짜 텍스트
         //backgroundColor: 'red',
-      },
+      }
     ]);
 
     return (
@@ -344,18 +352,18 @@ class Day extends Component {
             this.style.wrapper,
             {
               height: 48,
-              borderBottomColor: 'white',
+              borderBottomColor: 'white'
               //날짜 영역
               //borderWidth: 0.5,
               //borderColor: 'red',
-            },
+            }
           ]}>
           {fillers}
           {/* 달력 날짜 */}
           <View style={containerStyle}>
             <View
               style={[
-                dayTextContainer,
+                dayTextContainer
                 // BONG: 선택영역 원형 컬러
                 //{backgroundColor: 'yellow', borderRadius: 0},
               ]}>
@@ -365,9 +373,9 @@ class Day extends Component {
             </View>
           </View>
           {/* 중간 메모 영역 | APPEND BONG. */}
-          {this.createText()}
+          {this.createText(this.props.state === 'disabled')}
           {/* 배지 영역 | APPEND BONG. */}
-          {this.crateBage()}
+          {this.crateBage(this.props.state === 'disabled')}
         </View>
       </TouchableWithoutFeedback>
     );
