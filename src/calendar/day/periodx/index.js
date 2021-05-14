@@ -42,7 +42,7 @@ class Day extends Component {
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
     date: PropTypes.object,
-    id: PropTypes.number, // APPEND BONG
+    id: PropTypes.number, // APPEND BONG 
     markingExists: PropTypes.bool
   };
 
@@ -132,12 +132,18 @@ class Day extends Component {
       if (next.textColor) {
         prev.textStyle.color = next.textColor;
       }
+      // 이벤트로 랜더링 대상으로 처리 
+      if (next.dayEvent) {
+        prev.dayEvent = next.dayEvent;
+      }
+
       return prev;
-    }, defaultStyle);
+    }, defaultStyle);    
     return resultStyle;
   }
 
   // [APPEND BONG] BADGE 영역 표기하기
+  // key 이미지 unique key 경고로 추가함.
   crateBage = (isDisabled) => {
     let IconArrs = [];
     // 이전달 이후 달의 날짜 데이터의 경우는 색깔 변경한다.
@@ -153,7 +159,7 @@ class Day extends Component {
           } else if (IconArrsProps.length > 3) {
             IconArrs.pop();
             IconArrs.push(
-              <Text style={[styles.iconTextStyle, fontStyle8]}>
+              <Text style={[styles.iconTextStyle, fontStyle8]} key={'txt'}>
                 +{IconArrsProps.length - 2}
               </Text>,
             );
