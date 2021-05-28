@@ -10,7 +10,7 @@ import {styles, iconList as ICON_LIST} from './icons';
 
 // BONG, 2020.09.15
 const fontStyle8 = {
-  fontFamily: 'NotoSansCJKkr-Regular',
+  fontFamily: 'NotoSansKR-Regular',
   fontSize: 8,
   fontWeight: 'normal',
   fontStyle: 'normal',
@@ -21,7 +21,7 @@ const fontStyle8 = {
 
 // BONG, 2020.09.15
 const fontStyle14 = {
-  fontFamily: 'NotoSansCJKkr-Regular',
+  fontFamily: 'NotoSansKR-Regular',
   fontSize: 14,
   fontWeight: 'normal',
   fontStyle: 'normal'

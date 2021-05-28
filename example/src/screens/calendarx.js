@@ -238,7 +238,7 @@ export default class CalendarxScreen extends Component {
               dayHeaderNowMonth: {
                 maxWidth: 34, // 16.5 두자릿수 대응을 위해 x2배함.
                 height: 41.5,
-                fontFamily: 'NotoSansCJKkr-Medium',
+                fontFamily: 'NotoSansKR-Medium',
                 fontSize: 28,
                 fontWeight: Platform.OS == 'android' ? '500' : 'bold', // BONG, 2020.09.15
                 fontStyle: 'normal',
@@ -254,7 +254,7 @@ export default class CalendarxScreen extends Component {
               },
               dayHeaderArrow: {
                 height: 22.5,
-                fontFamily: 'NotoSansCJKkr-Medium',
+                fontFamily: 'NotoSansKR-Medium',
                 fontSize: 15,
                 fontWeight: '500',
                 fontStyle: 'normal',
@@ -282,7 +282,7 @@ export default class CalendarxScreen extends Component {
               dayHeader: {
                 width: 40,
                 height: 14.5,
-                fontFamily: 'NotoSansCJKkr-Regular',
+                fontFamily: 'NotoSansKR-Regular',
                 fontSize: 10,
                 fontWeight: 'normal',
                 fontStyle: 'normal',

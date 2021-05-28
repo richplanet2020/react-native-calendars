@@ -11,10 +11,10 @@ export const textDefaultColor = '#2d4150';
 export const textColor = '#43515c';
 export const textLinkColor = '#00BBF2';
 
-export const textDayFontFamily = 'NotoSansCJKkr-Regular'; // System  , BONG,2020.09.15 추가
-export const textMonthFontFamily = 'NotoSansCJKkr-Regular'; // System  , BONG,2020.09.15 추가
-export const textDayHeaderFontFamily = 'NotoSansCJKkr-Regular'; // System , BONG,2020.09.15 추가
-export const todayButtonFontFamily = 'NotoSansCJKkr-Regular'; // System , BONG,2020.09.15 추가
+export const textDayFontFamily = 'NotoSansKR-Regular'; // System  , BONG,2020.09.15 추가
+export const textMonthFontFamily = 'NotoSansKR-Regular'; // System  , BONG,2020.09.15 추가
+export const textDayHeaderFontFamily = 'NotoSansKR-Regular'; // System , BONG,2020.09.15 추가
+export const todayButtonFontFamily = 'NotoSansKR-Regular'; // System , BONG,2020.09.15 추가
 
 export const textDayFontWeight = '300';
 export const textMonthFontWeight = '300';
