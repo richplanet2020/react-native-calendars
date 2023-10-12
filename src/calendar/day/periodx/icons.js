@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     height: 12,
     width: 12,
     marginRight: 0.5, // append bong.choi, 2020.8.3
-    marginLeft: 0.5 // append  bong.choi, 2020.8.3
+    marginLeft: 0.5, // append  bong.choi, 2020.8.3
 
     //BONG:아이콘 박스
     //borderColor: 'black',
@@ -28,24 +28,24 @@ const styles = StyleSheet.create({
     color: '#000000',
     paddingLeft: 2,
     marginRight: 0.5, // append bong.choi, 2020.8.3
-    marginLeft: 0.5 // append bong.choi, 2020.8.3
+    marginLeft: 0.5, // append bong.choi, 2020.8.3
   },
   iconContainer: {
     height: 12,
     width: 40,
     flexDirection: 'row',
-    justifyContent: 'center' // append bong.choi, 2020.8.3
+    justifyContent: 'center', // append bong.choi, 2020.8.3
     //backgroundColor: 'blue', // append bongki.choi, 2020.8.10
   },
   // 캘린더 날짜문구 영역 스타일 [s]
   textContainer: {
     height: 13,
     width: 40,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   textStyle: {
     fontSize: 8,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   // 캘린더 날짜문구 영역 스타일 [e]
   selectedStyle: {
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 const iconList = {
@@ -181,7 +181,11 @@ const iconList = {
   ),
   // 사랑(I16)
   lov: (
-    <Image key={'lov'} style={styles.iconStyle} source={require('../../img/bIcSexN.png')}/>
+    <Image
+      key={'lov'}
+      style={styles.iconStyle}
+      source={require('../../img/bIcSexN.png')}
+    />
   ),
   // 병원진료(I17)
   trt: (
@@ -249,8 +253,11 @@ const iconList = {
   ),
   // 체중기록(I25)
   wt: (
-    <Image 
-      key={'wt'} style={styles.iconStyle} source={require('../../img/bIcBmiN.png')}/>
+    <Image
+      key={'wt'}
+      style={styles.iconStyle}
+      source={require('../../img/bIcBmiN.png')}
+    />
   ),
   // 알람(I26)
   I26: (
@@ -262,8 +269,11 @@ const iconList = {
   ),
   // 감기(I27)
   I27: (
-    
-    <Image key={'I27'} style={styles.iconStyle} source={require('../../img/bIcFluN.png')}/>
+    <Image
+      key={'I27'}
+      style={styles.iconStyle}
+      source={require('../../img/bIcFluN.png')}
+    />
   ),
   // 두통(I28)
   I28: (
@@ -336,7 +346,23 @@ const iconList = {
       style={styles.iconStyle}
       source={require('../../img/bIcOvluationN.png')}
     />
-  )
+  ),
+  // 배란일(ovi1)
+  ovi1: (
+    <Image
+      key={'ovi1'}
+      style={styles.iconStyle}
+      source={require('../../img/b_ic_expectedovluation_s_n.png')}
+    />
+  ),
+  // 배란예정일(ovi2)
+  ovi2: (
+    <Image
+      key={'ovi2'}
+      style={styles.iconStyle}
+      source={require('../../img/bIcOvluationN.png')}
+    />
+  ),
 };
 
 export {styles, iconList};
