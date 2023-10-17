@@ -352,7 +352,7 @@ const iconList = {
     <Image
       key={'ovi1'}
       style={styles.iconStyle}
-      source={require('../../img/b_ic_expectedovluation_s_n.png')}
+      source={require('../../img/bIcOvluationN.png')}
     />
   ),
   // 배란예정일(ovi2)
@@ -360,7 +360,7 @@ const iconList = {
     <Image
       key={'ovi2'}
       style={styles.iconStyle}
-      source={require('../../img/bIcOvluationN.png')}
+      source={require('../../img/b_ic_expectedovluation_s_n.png')}
     />
   ),
 };
